@@ -1,6 +1,6 @@
 #include"event.h"
 
-std::string Event::getText() const {
+std::string Event::getText() const  {
     return this->text;
 }
 
