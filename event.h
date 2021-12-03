@@ -8,8 +8,6 @@
 #include "character.h"
 #include "OptionSet.h"
 
-typedef std::vector<int> attr;
-
 class Event {
 public:
     virtual attr getDelta(const Character*, const int) const;
