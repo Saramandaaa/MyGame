@@ -14,20 +14,25 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>150</y>
-      <width>500</width>
-      <height>300</height>
+      <x>60</x>
+      <y>390</y>
+      <width>661</width>
+      <height>161</height>
      </rect>
     </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    <layout class="QVBoxLayout" name="buttonsLayout"/>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser">
+    <property name="geometry">
+     <rect>
+      <x>175</x>
+      <y>30</y>
+      <width>450</width>
+      <height>350</height>
+     </rect>
     </property>
    </widget>
   </widget>

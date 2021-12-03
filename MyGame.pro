@@ -16,24 +16,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    OptionSet.cpp \
     attribute.cpp \
     character.cpp \
     controller.cpp \
     event.cpp \
     eventlist.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    optionset.cpp
 
 HEADERS += \
-    OptionSet.h \
     attribute.h \
     character.h \
     controller.h \
     event.h \
     eventlist.h \
     eventoption.h \
-    mainwindow.h
+    mainwindow.h \
+    optionset.h
 
 FORMS += \
     mainwindow.ui

@@ -22,3 +22,7 @@ Event Controller::getCurrentEvent() {
 Character Controller::getMainCharacter() {
     return *this->mainCharacter;
 }
+
+bool Controller::isReady() {
+    return currentEvent && mainCharacter;
+}

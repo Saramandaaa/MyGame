@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 #include "character.h"
-#include "OptionSet.h"
+#include "optionset.h"
 
 class Event {
 public:

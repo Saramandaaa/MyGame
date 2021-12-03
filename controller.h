@@ -9,6 +9,7 @@ class Controller : public QObject{
     Q_OBJECT
 public:
     void run(const int, const void*);
+    bool isReady();
     Event getCurrentEvent();
     Character getMainCharacter();
     Controller() {

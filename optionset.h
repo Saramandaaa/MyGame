@@ -30,6 +30,7 @@ public:
 
 	// 遍历选项集
 	void traverse();
+    int size();
 };
 
 #endif
