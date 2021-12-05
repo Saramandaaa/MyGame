@@ -66,5 +66,7 @@ private:
     void initController();
     void initButtons(); //连接到按钮
     bool loadCurrentEvent(); //读取当前事件
+    void setTable(int, int, std::string);
+    void flushTable();
 };
 #endif // MAINWINDOW_H

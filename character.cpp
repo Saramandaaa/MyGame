@@ -4,6 +4,16 @@
 
 Character::Character() {
     attribute.isDelta = false;
+    attribute[AttributeEnum::physical_quality] = 100;
+    attribute[AttributeEnum::top_of_physical_quality] = 100;
+    attribute[AttributeEnum::study_rate] = 100;
+    attribute[AttributeEnum::top_of_study_rate] = 100;
+    attribute[AttributeEnum::term] = 1;
+    attribute[AttributeEnum::affair0] = -1;
+    attribute[AttributeEnum::affair1] = -1;
+    attribute[AttributeEnum::affair2] = -1;
+    attribute[AttributeEnum::affair3] = -1;
+    attribute[AttributeEnum::affair4] = -1;
 }
 Character::~Character() {
 

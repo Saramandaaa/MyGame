@@ -17,9 +17,9 @@
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>220</x>
       <y>30</y>
-      <width>461</width>
+      <width>551</width>
       <height>231</height>
      </rect>
     </property>
@@ -33,10 +33,10 @@
    <widget class="QWidget" name="buttons" native="true">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>290</y>
-      <width>641</width>
-      <height>241</height>
+      <x>220</x>
+      <y>280</y>
+      <width>551</width>
+      <height>261</height>
      </rect>
     </property>
    </widget>
@@ -45,8 +45,8 @@
      <rect>
       <x>30</x>
       <y>30</y>
-      <width>256</width>
-      <height>231</height>
+      <width>171</width>
+      <height>333</height>
      </rect>
     </property>
    </widget>

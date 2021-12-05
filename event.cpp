@@ -20,6 +20,6 @@ Event::~Event() {
 
 attr TestEvent::getDelta(const Character* user, const int option) const {
     attr res;
-    res[AttributeEnum::physical_quality] = option;
+    res[AttributeEnum::physical_quality] = option + 1;
     return res;
 }
