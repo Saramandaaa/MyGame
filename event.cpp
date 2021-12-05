@@ -5,6 +5,10 @@ std::string Event::getText() const {
     return this->text;
 }
 
+void Event::changeText(const std::string& t) {
+    this->text = t;
+}
+
 attr Event::getDelta(const Character* user, const int option) const {
     attr res;
     return res;
@@ -12,4 +16,10 @@ attr Event::getDelta(const Character* user, const int option) const {
 
 Event::~Event() {
     std::string().swap(this->text);
+}
+
+attr TestEvent::getDelta(const Character* user, const int option) const {
+    attr res;
+    res[0] = option;
+    return res;
 }

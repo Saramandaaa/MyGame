@@ -1,10 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "event.h"
-#include "eventoption.h"
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QPointer>
+#include <QDebug>
+
+QTextCodec *codec = QTextCodec::codecForName("GBK");
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,8 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     optionNum = 0;
-    options = nullptr;
-    //setFixedSize(ui->centralwidget->width(), ui->centralwidget->height());
+    buttonsLayout = nullptr;
+    initButtons();
     initController();
 }
 
@@ -25,6 +27,8 @@ MainWindow::~MainWindow()
 void MainWindow::initController() {
     controller = new Controller();
     QObject::connect(this, &MainWindow::buttonClicked, controller, &Controller::run);
+    controller->init();
+    flush();
 }
 
 void MainWindow::flush() {
@@ -33,41 +37,47 @@ void MainWindow::flush() {
 }
 
 void MainWindow::setText(const std::string& text) {
-    ui->textBrowser->append(text.c_str());
+    std::string message = text + '\n';
+    ui->textBrowser->insertPlainText(codec->toUnicode(message.c_str()));
     ui->textBrowser->moveCursor(QTextCursor::End);
 }
 
-bool MainWindow::linkButtons() {
-    for (int i = 0; i < optionNum; i++) {
-        QObject::connect(&options[i], &EventOption::choose, this, &MainWindow::emitButtonClicked);
+bool MainWindow::initButtons() {
+    qDebug() << "Init buttons...";
+
+    buttonsLayout = new QVBoxLayout(ui->buttons);
+    buttonsLayout->setDirection(QVBoxLayout::TopToBottom);
+    for(int i = 0; i < MAX_OPTION_NUM; i++) {
+        buttons[i] = new QPushButton("...");
+        buttonsLayout->addWidget(buttons[i], 1);
     }
+    ui->buttons->setLayout(buttonsLayout);
+
+    QObject::connect(buttons[0], &QPushButton::clicked, this, &MainWindow::emitButtonClicked0);
+    QObject::connect(buttons[1], &QPushButton::clicked, this, &MainWindow::emitButtonClicked1);
+    QObject::connect(buttons[2], &QPushButton::clicked, this, &MainWindow::emitButtonClicked2);
+    QObject::connect(buttons[3], &QPushButton::clicked, this, &MainWindow::emitButtonClicked3);
+    QObject::connect(buttons[4], &QPushButton::clicked, this, &MainWindow::emitButtonClicked4);
+
+    qDebug() << "Done.";
     return true;
 }
 
 bool MainWindow::loadCurrentEvent() {
     if (!controller || !controller->isReady()) return false;
 
-    for (int i = 0; i < optionNum; i++)
-        options[i].removeConnection();
-    delete [] options;
-
     Event event = controller->getCurrentEvent();
-    QVBoxLayout *buttonsLayout = ui->buttonsLayout;
-    buttonsLayout->setDirection(QVBoxLayout::TopToBottom);
-    QLayoutItem *child;
-    while(child = buttonsLayout->takeAt(0))
-        delete child;
 
+    qDebug() << "Changing buttons' status...";
     optionNum = event.optionSet.size();
-    options = new EventOption [optionNum];
     for (int i = 0; i < optionNum; i++) {
-        QPointer<QPushButton> but = new QPushButton(event.optionSet.findOption(i)->second.c_str());
-        buttonsLayout->addWidget(but, 1);
-        options[i].button = but;
-        options[i].id = i;
-        options[i].setConnection();
+        buttons[i]->setText(event.optionSet.findOption(i)->second.c_str());
+        buttons[i]->setDisabled(false);
+    }
+    for (int i = optionNum; i < MAX_OPTION_NUM; i++) {
+        buttons[i]->setText("");
+        buttons[i]->setDisabled(true);
     }
 
-    setLayout(buttonsLayout);
-    return linkButtons();
+    return true;
 }

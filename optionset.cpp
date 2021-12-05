@@ -1,6 +1,7 @@
 // Updata at 11/30, 22:50. By ÌÆè÷ð©, ³õ´Î±àÐ´. 
 
 #include "optionset.h"
+#include <QDebug>
 
 OptionSet::OptionSet() {
 
@@ -45,7 +46,8 @@ void OptionSet::clearOption() {
 
 void OptionSet::traverse() {
 	for (std::vector<std::pair<int, std::string>>::iterator it = optionSet.begin(); it != optionSet.end(); it++) {
-		printf("%d, %s. \n", it->first, it->second.c_str());
+        //printf("%d, %s. \n", it->first, it->second.c_str());
+        qDebug() << it->first << ", " << it->second.c_str();
 	}
 }
 

@@ -5,7 +5,18 @@
 #include"mainwindow.h"
 #include<qdebug.h>
 
+Controller::Controller() {
+    currentEvent = nullptr;
+    mainCharacter = nullptr;
+}
+
+void Controller::init() {
+    mainCharacter = new Character();
+    currentEvent = EventList::getNewEvent(mainCharacter);
+}
+
 void Controller::run(const int option, const void* w) {
+    if (!isReady()) return;
     attr delta = this->currentEvent->getDelta(this->mainCharacter, option);
     Character* newCharacter = mainCharacter->update(delta);
     Event* newEvent = EventList::getNewEvent(newCharacter);
@@ -24,5 +35,5 @@ Character Controller::getMainCharacter() {
 }
 
 bool Controller::isReady() {
-    return currentEvent && mainCharacter;
+    return currentEvent != nullptr && mainCharacter != nullptr;
 }

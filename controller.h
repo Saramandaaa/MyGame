@@ -9,13 +9,11 @@ class Controller : public QObject{
     Q_OBJECT
 public:
     void run(const int, const void*);
+    void init();
     bool isReady();
     Event getCurrentEvent();
     Character getMainCharacter();
-    Controller() {
-        currentEvent = new Event();
-        mainCharacter = new Character();
-    }
+    Controller();
 private:
     Event* currentEvent;
     Character* mainCharacter;

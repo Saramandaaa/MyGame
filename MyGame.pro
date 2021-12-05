@@ -31,7 +31,6 @@ HEADERS += \
     controller.h \
     event.h \
     eventlist.h \
-    eventoption.h \
     mainwindow.h \
     optionset.h
 

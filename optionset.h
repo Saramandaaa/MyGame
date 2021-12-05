@@ -7,6 +7,8 @@
 #include<vector>
 #include<string>
 
+#define MAX_OPTION_NUM 5
+
 class OptionSet
 {
 private:
