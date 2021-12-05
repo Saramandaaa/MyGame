@@ -17,20 +17,36 @@
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>175</x>
+      <x>310</x>
       <y>30</y>
-      <width>450</width>
+      <width>461</width>
       <height>231</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft YaHei UI</family>
+      <pointsize>14</pointsize>
+     </font>
     </property>
    </widget>
    <widget class="QWidget" name="buttons" native="true">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>80</x>
       <y>290</y>
-      <width>501</width>
+      <width>641</width>
       <height>241</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="attributes">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>256</width>
+      <height>231</height>
      </rect>
     </property>
    </widget>

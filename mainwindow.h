@@ -6,10 +6,15 @@
 #include <QLayout>
 #include <string>
 #include <vector>
-#include <qdebug.h>
+#include <QDebug>
 #include "controller.h"
 #include "event.h"
 #include <QTextCodec>
+#include <QVBoxLayout>
+#include <QPointer>
+#include <QDebug>
+#include <QTableWidget>
+#include <QTableWidgetItem>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -54,9 +59,12 @@ private:
     QPushButton *buttons[MAX_OPTION_NUM];
     int optionNum;
     QVBoxLayout *buttonsLayout;
+    QTableWidget *table;
 
+    void initAttrTable();
+    void updateAttr();
     void initController();
-    bool initButtons(); //连接到按钮
+    void initButtons(); //连接到按钮
     bool loadCurrentEvent(); //读取当前事件
 };
 #endif // MAINWINDOW_H

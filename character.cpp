@@ -1,55 +1,41 @@
 // 2021.12.3, 11:00. By ÌÆè÷ð©, ´ó·ùÖØ¹¹. 
-#include"character.h"
+#include "character.h"
+#include <assert.h>
 
 Character::Character() {
-    for (int i = 0; i < ATTR_AMT; i++) {
-        attributes[i] = 0;
-    }
+    attribute.isDelta = false;
 }
 Character::~Character() {
 
 }
 
 attr Character::getAttributes() {
-    Attribute attribute;
-    for (int i = 0; i < ATTR_AMT; i++) {
-        attribute[i] = attributes[i];
-    }
     return attribute;
 }
-double* Character::getSingleAttribute(int id) {
+/*int Character::getSingleAttribute(int id) {
     if (id < 0 || id > ATTR_AMT) return nullptr;
     return &(attributes[id]);
-}
-double* Character::getSingleAttribute(AttributeEnum name) {
+}*/
+ATTR_TYPE Character::getSingleAttribute(AttributeEnum name) {
     int id = (int)name;
-    if (id < 0 || id > ATTR_AMT) return nullptr;
-    return &(attributes[id]);
+    assert (id >= 0 && id < ATTR_AMT);
+    return attribute[name];
 }
 
-Character* Character::update(attr& attribute) {
-    for (int i = 0; i < ATTR_AMT; i++) {
-        updateSingle((AttributeEnum)i, attribute[i], attribute.isDelta);
-    }
+Character* Character::update(const attr& delta) {
+    attribute += delta;
     return this;
 }
-double* Character::updateSingle(int id, double value, bool isDelta) {
+/*double* Character::updateSingle(int id, double value, bool isDelta) {
     if (id < 0 || id >= ATTR_AMT) return nullptr;
     if (isDelta) attributes[id] += value;
     else attributes[id] = value;
     return &(attributes[id]);
-}
-double* Character::updateSingle(AttributeEnum name, double value, bool isDelta) {
+}*/
+ATTR_TYPE Character::updateSingle(AttributeEnum name, ATTR_TYPE value, bool isDelta) {
     int id = (int)name;
-    if (id < 0 || id >= ATTR_AMT) return nullptr;
-    if (isDelta) attributes[id] += value;
-    else attributes[id] = value;
-    return &(attributes[id]);
-}
-
-void Character::printAttribute() {
-    for (int i = 0; i < ATTR_AMT; i++) {
-        printf("%6.2f ", attributes[i]);
-    }
-    printf("\n");
+    assert(id >= 0 && id < ATTR_AMT);
+    if (isDelta) attribute[name] += value;
+    else attribute[name] = value;
+    return attribute[name];
 }

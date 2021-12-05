@@ -1,10 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "event.h"
-#include <QVBoxLayout>
-#include <QPushButton>
-#include <QPointer>
-#include <QDebug>
 
 QTextCodec *codec = QTextCodec::codecForName("GBK");
 
@@ -17,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     buttonsLayout = nullptr;
     initButtons();
     initController();
+    initAttrTable();
+    flush();
 }
 
 MainWindow::~MainWindow()
@@ -28,7 +26,6 @@ void MainWindow::initController() {
     controller = new Controller();
     QObject::connect(this, &MainWindow::buttonClicked, controller, &Controller::run);
     controller->init();
-    flush();
 }
 
 void MainWindow::flush() {
@@ -38,12 +35,16 @@ void MainWindow::flush() {
 
 void MainWindow::setText(const std::string& text) {
     std::string message = text;
-    qDebug() << message.c_str();
+    //qDebug() << message.c_str();
     ui->textBrowser->insertPlainText(codec->toUnicode(message.c_str()));
     ui->textBrowser->moveCursor(QTextCursor::End);
 }
 
-bool MainWindow::initButtons() {
+void MainWindow::initAttrTable() {
+
+}
+
+void MainWindow::initButtons() {
     qDebug() << "Init buttons...";
 
     buttonsLayout = new QVBoxLayout(ui->buttons);
@@ -61,7 +62,6 @@ bool MainWindow::initButtons() {
     QObject::connect(buttons[4], &QPushButton::clicked, this, &MainWindow::emitButtonClicked4);
 
     qDebug() << "Done.";
-    return true;
 }
 
 bool MainWindow::loadCurrentEvent() {
