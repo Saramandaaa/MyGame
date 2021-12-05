@@ -25,25 +25,26 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void flush(); //更新事件显示
+    void setText(const std::string& text); //设置事件描述
 
     void emitButtonClicked0() {
-        setText("选择了选项0");
+        setText("选择了选项:");
         emit buttonClicked(0, this);
     }
     void emitButtonClicked1() {
-        setText("选择了选项1");
+        setText("选择了选项:");
         emit buttonClicked(1, this);
     }
     void emitButtonClicked2() {
-        setText("选择了选项2");
+        setText("选择了选项:");
         emit buttonClicked(2, this);
     }
     void emitButtonClicked3() {
-        setText("选择了选项3");
+        setText("选择了选项:");
         emit buttonClicked(3, this);
     }
     void emitButtonClicked4() {
-        setText("选择了选项4");
+        setText("选择了选项:");
         emit buttonClicked(4, this);
     }
 
@@ -55,7 +56,6 @@ private:
     QVBoxLayout *buttonsLayout;
 
     void initController();
-    void setText(const std::string& text); //设置事件描述
     bool initButtons(); //连接到按钮
     bool loadCurrentEvent(); //读取当前事件
 };

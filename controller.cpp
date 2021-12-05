@@ -17,13 +17,15 @@ void Controller::init() {
 
 void Controller::run(const int option, const void* w) {
     if (!isReady()) return;
+    ((MainWindow*)w)->setText(currentEvent->optionSet.findOption(option)->second + "\n\n");
     attr delta = this->currentEvent->getDelta(this->mainCharacter, option);
-    Character* newCharacter = mainCharacter->update(delta);
-    Event* newEvent = EventList::getNewEvent(newCharacter);
-    delete this->mainCharacter;
-    this->mainCharacter = newCharacter;
+
+    mainCharacter = mainCharacter->update(delta);
+
+    Event* newEvent = EventList::getNewEvent(mainCharacter);
     delete this->currentEvent;
     this->currentEvent = newEvent;
+
     ((MainWindow*)w)->flush();
 }
 

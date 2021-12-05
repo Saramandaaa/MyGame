@@ -33,11 +33,12 @@ void MainWindow::initController() {
 
 void MainWindow::flush() {
     if (!loadCurrentEvent()) return;
-    setText(this->controller->getCurrentEvent().getText());
+    setText(this->controller->getCurrentEvent().getText() + '\n');
 }
 
 void MainWindow::setText(const std::string& text) {
-    std::string message = text + '\n';
+    std::string message = text;
+    qDebug() << message.c_str();
     ui->textBrowser->insertPlainText(codec->toUnicode(message.c_str()));
     ui->textBrowser->moveCursor(QTextCursor::End);
 }
