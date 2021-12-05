@@ -52,6 +52,7 @@ public:
         setText("选择了选项:");
         emit buttonClicked(4, this);
     }
+    void closeEvent(QCloseEvent *event);
 
 private:
     Ui::MainWindow *ui;

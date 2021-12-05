@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "event.h"
+#include <QCloseEvent>
 
 QTextCodec *codec = QTextCodec::codecForName("GBK");
 
@@ -15,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     initController();
     initAttrTable();
     flush();
+    qDebug() << "Initialization End.";
 }
 
 MainWindow::~MainWindow()
@@ -23,6 +25,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::initController() {
+    qDebug() << "Init controller...";
     controller = new Controller();
     QObject::connect(this, &MainWindow::buttonClicked, controller, &Controller::run);
     controller->init();
@@ -42,6 +45,7 @@ void MainWindow::setText(const std::string& text) {
 }
 
 void MainWindow::initAttrTable() {
+    qDebug() << "Init attributes table...";
     table = ui->attributes;
     int n = 9, m = 2;
     table->setColumnCount(m);
@@ -119,5 +123,10 @@ bool MainWindow::loadCurrentEvent() {
         buttons[i]->setDisabled(true);
     }
 
+    qDebug() << "Done.";
     return true;
+}
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+    parentWidget()->show();
 }

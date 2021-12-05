@@ -23,7 +23,8 @@ SOURCES += \
     eventlist.cpp \
     main.cpp \
     mainwindow.cpp \
-    optionset.cpp
+    optionset.cpp \
+    startmenu.cpp
 
 HEADERS += \
     attribute.h \
@@ -32,10 +33,12 @@ HEADERS += \
     event.h \
     eventlist.h \
     mainwindow.h \
-    optionset.h
+    optionset.h \
+    startmenu.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    startmenu.ui
 
 TRANSLATIONS += \
     MyGame_zh_CN.ts
