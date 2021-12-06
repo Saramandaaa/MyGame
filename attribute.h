@@ -1,4 +1,4 @@
-// 2021.12.3, 11:00. By ÌÆè÷ð©, ´ó·ùÖØ¹¹. 
+// 2021.12.6, 19:23. By Saramanda
 
 #ifndef _ATTRIBUTE_H_
 #define _ATTRIBUTE_H_
@@ -61,7 +61,7 @@ class Attribute
 {
 	
 public:
-	bool isDelta;
+    bool isDelta;
     ATTR_TYPE attributes[ATTR_AMT];
 	
     Attribute();

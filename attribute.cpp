@@ -2,6 +2,7 @@
 
 #include "attribute.h"
 #include <assert.h>
+#include <QDebug>
 
 Attribute::Attribute() {
 	isDelta = true;
@@ -32,7 +33,7 @@ void Attribute::operator+=(Attribute other) {
 
 void Attribute::print() {
 	for (int i = 0; i < ATTR_AMT; i++) {
-		printf("%6.2f ", attributes[i]);
+        qDebug() << attributes[i];
 	}
-	printf("\n");
+    //printf("\n");
 }
