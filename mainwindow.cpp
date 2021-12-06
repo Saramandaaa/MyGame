@@ -94,7 +94,8 @@ void MainWindow::initButtons() {
     buttonsLayout->setDirection(QVBoxLayout::TopToBottom);
     for(int i = 0; i < MAX_OPTION_NUM; i++) {
         buttons[i] = new QPushButton("...");
-        buttonsLayout->addWidget(buttons[i], 1);
+        buttons[i]->setFont(QFont("Î¢ÈíÑÅºÚ", 12));
+        buttonsLayout->addWidget(buttons[i], 2);
     }
     ui->buttons->setLayout(buttonsLayout);
 

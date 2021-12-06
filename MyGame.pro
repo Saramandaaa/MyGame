@@ -21,6 +21,7 @@ SOURCES += \
     controller.cpp \
     event.cpp \
     eventlist.cpp \
+    loadsave.cpp \
     main.cpp \
     mainwindow.cpp \
     optionset.cpp \
@@ -32,11 +33,13 @@ HEADERS += \
     controller.h \
     event.h \
     eventlist.h \
+    loadsave.h \
     mainwindow.h \
     optionset.h \
     startmenu.h
 
 FORMS += \
+    loadsave.ui \
     mainwindow.ui \
     startmenu.ui
 
