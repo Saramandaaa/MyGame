@@ -2,6 +2,7 @@
 #include "character.h"
 #include "event.h"
 #include <string>
+#include <assert.h>
 
 class DailyEvent : public Event {
 public:
@@ -46,7 +47,9 @@ attr DailyEvent::getDelta(const Character* c, const int o) const {
     if (o == 0) result = daily_event_study(c);
     else if (o == 1) result = daily_event_exercise(c);
     else if (o == 2) result = daily_event_entertainment(c);
-
+    else if (o == 3) result = daily_event_prp(c);
+    else if (o == 5) result = daily_event_novation(c);
+    else assert(false);
     //修改最近的事件
     return change_affairs(c, o, result);
 }
