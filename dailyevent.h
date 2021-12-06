@@ -48,7 +48,7 @@ attr DailyEvent::getDelta(const Character* c, const int o) const {
     else if (o == 1) result = daily_event_exercise(c);
     else if (o == 2) result = daily_event_entertainment(c);
     else if (o == 3) result = daily_event_prp(c);
-    else if (o == 5) result = daily_event_novation(c);
+    else if (o == 4) result = daily_event_novation(c);
     else assert(false);
     //修改最近的事件
     return change_affairs(c, o, result);
@@ -105,9 +105,9 @@ attr DailyEvent::daily_event_study(const Character* c) const {
 attr DailyEvent::daily_event_exercise(const Character *c) const {
     attr delta;
 
-    ATTR_TYPE study_rate       = c->getSingleAttribute(AttributeEnum::study_rate);
-    ATTR_TYPE physical_quality = c->getSingleAttribute(AttributeEnum::physical_quality);
-    ATTR_TYPE pressure         = c->getSingleAttribute(AttributeEnum::pressure);
+    //ATTR_TYPE study_rate       = c->getSingleAttribute(AttributeEnum::study_rate);
+    //ATTR_TYPE physical_quality = c->getSingleAttribute(AttributeEnum::physical_quality);
+    //ATTR_TYPE pressure         = c->getSingleAttribute(AttributeEnum::pressure);
 
     //获取近5次事件统计
     //int count_study         = c->getAttributes().getStudy() + c->getAttributes().getTask();
@@ -137,9 +137,9 @@ attr DailyEvent::daily_event_exercise(const Character *c) const {
 attr DailyEvent::daily_event_entertainment(const Character *c) const {
     attr delta;
 
-    ATTR_TYPE study_rate       = c->getSingleAttribute(AttributeEnum::study_rate);
-    ATTR_TYPE physical_quality = c->getSingleAttribute(AttributeEnum::physical_quality);
-    ATTR_TYPE pressure         = c->getSingleAttribute(AttributeEnum::pressure);
+    //ATTR_TYPE study_rate       = c->getSingleAttribute(AttributeEnum::study_rate);
+    //ATTR_TYPE physical_quality = c->getSingleAttribute(AttributeEnum::physical_quality);
+    //ATTR_TYPE pressure         = c->getSingleAttribute(AttributeEnum::pressure);
 
     //获取近5次事件统计
     //int count_study         = c->getAttributes().getStudy() + c->getAttributes().getTask();
