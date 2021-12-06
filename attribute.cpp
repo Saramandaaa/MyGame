@@ -1,4 +1,4 @@
-// 2021.12.3, 11:00. By 唐梓皓, 大幅重构. 
+// 2021.12.6, 23:00. By Saramanda, add limit to operator +=
 
 #include "attribute.h"
 #include <assert.h>
@@ -25,10 +25,20 @@ void Attribute::operator+=(Attribute other) {
     assert(other.isDelta);
     for (int i = 0; i < 18; i++) {
         attributes[i] += other[i];
+        if (attributes[i] < 0) attributes[i] = 0;
     }
     for (int i = 18; i < ATTR_AMT; i++) {
         attributes[i] = other[i];
     }
+    //调整存在上限的值
+    if ((*this)[AttributeEnum::physical_quality] > (*this)[AttributeEnum::top_of_physical_quality])
+        (*this)[AttributeEnum::physical_quality] = (*this)[AttributeEnum::top_of_physical_quality];
+    if ((*this)[AttributeEnum::study_rate] > (*this)[AttributeEnum::top_of_study_rate])
+        (*this)[AttributeEnum::study_rate] = (*this)[AttributeEnum::top_of_study_rate];
+    if ((*this)[AttributeEnum::pressure] < (*this)[AttributeEnum::bottom_of_pressure])
+        (*this)[AttributeEnum::pressure] = (*this)[AttributeEnum::bottom_of_pressure];
+    if ((*this)[AttributeEnum::pressure] > (ATTR_TYPE)100)
+        (*this)[AttributeEnum::pressure] = (ATTR_TYPE)100;
 }
 
 void Attribute::print() {

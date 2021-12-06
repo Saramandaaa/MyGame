@@ -2,7 +2,7 @@
 
 #ifndef _ATTRIBUTE_H_
 #define _ATTRIBUTE_H_
-#include<stdio.h>
+#include <cstdio>
 
 // 定义了double类属性的数量
 #define ATTR_AMT 23
@@ -42,8 +42,8 @@ enum class AttributeEnum
     double bottom_of_pressure=0;          //压力下限(非可见)
     double study_rate;                    //学习效率（非可见）
     double top_of_study_rate=1;           //学习效率上限（非可见）
-    double knowlodge;                     //本学期知识水平（可见）
-    double all_knowlodge=0;               //总学期知识水平（可见）
+    double knowledge;                     //本学期知识水平（可见）
+    double all_knowledge=0;               //总学期知识水平（可见）
     double scientific_research_time=0;    //科研经验(可见)
     double social=0;                      //社交力(非可见)
     int    term=1;                        //当前学期数（1-8）（可见）
