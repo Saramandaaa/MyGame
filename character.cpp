@@ -19,14 +19,14 @@ Character::~Character() {
 
 }
 
-attr Character::getAttributes() {
+attr Character::getAttributes() const {
     return attribute;
 }
 
-ATTR_TYPE Character::getSingleAttribute(AttributeEnum name) {
+ATTR_TYPE Character::getSingleAttribute(AttributeEnum name) const {
     int id = (int)name;
     assert (id >= 0 && id < ATTR_AMT);
-    return attribute[name];
+    return attribute.attributes[(int)name];
 }
 
 Character* Character::update(const attr& delta) {

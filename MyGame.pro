@@ -31,6 +31,7 @@ HEADERS += \
     attribute.h \
     character.h \
     controller.h \
+    dailyevent.h \
     event.h \
     eventlist.h \
     loadsave.h \

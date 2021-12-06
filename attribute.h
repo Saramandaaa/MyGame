@@ -17,8 +17,8 @@ enum class AttributeEnum
     bottom_of_pressure = 3,
     study_rate = 4,
     top_of_study_rate = 5,
-    knowlodge = 6,
-    all_knowlodge = 7,
+    knowledge = 6,
+    all_knowledge = 7,
     scientific_research_time = 8,
     social = 9,
     term = 10,
@@ -69,9 +69,15 @@ public:
     
     // 可用中括号直接访问元素，可使用id或属性（须用AttributeEnum作为命名空间，如AttributeEnum::basicStrength）
     // 没有溢出保护
-    ATTR_TYPE& operator[](AttributeEnum attributeEnum);
+    ATTR_TYPE& operator[](const AttributeEnum attributeEnum);
     void operator+=(Attribute other); //other的isDelta必须为true否则报错
     void print(); // 仅限测试用
+    int getStudy();
+    int getExercise();
+    int getEntertainment();
+    int getPrp();
+    int getNovation();
+    int getTask();
 
 private:
     ATTR_TYPE& operator[](int num);

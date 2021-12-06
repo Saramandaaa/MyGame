@@ -79,8 +79,8 @@ void MainWindow::flushTable() {
     setTable(0, 1, std::to_string(current[AttributeEnum::term]));
     setTable(1, 1, std::to_string(current[AttributeEnum::physical_quality]));
     setTable(2, 1, std::to_string(current[AttributeEnum::pressure]));
-    setTable(3, 1, std::to_string(current[AttributeEnum::knowlodge]));
-    setTable(4, 1, std::to_string(current[AttributeEnum::all_knowlodge]));
+    setTable(3, 1, std::to_string(current[AttributeEnum::knowledge]));
+    setTable(4, 1, std::to_string(current[AttributeEnum::all_knowledge]));
     setTable(5, 1, std::to_string(current[AttributeEnum::scientific_research_time]));
     setTable(6, 1, std::to_string(current[AttributeEnum::time_love]));
     setTable(7, 1, std::to_string(current[AttributeEnum::number_prp]));
