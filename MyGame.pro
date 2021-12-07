@@ -25,7 +25,10 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     optionset.cpp \
-    startmenu.cpp
+    randsummoner.cpp \
+    saveinfo.cpp \
+    startmenu.cpp \
+    textcode.cpp
 
 HEADERS += \
     attribute.h \
@@ -37,7 +40,10 @@ HEADERS += \
     loadsave.h \
     mainwindow.h \
     optionset.h \
-    startmenu.h
+    randsummoner.h \
+    saveinfo.h \
+    startmenu.h \
+    textcode.h
 
 FORMS += \
     loadsave.ui \

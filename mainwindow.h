@@ -9,6 +9,7 @@
 #include <QDebug>
 #include "controller.h"
 #include "event.h"
+#include "saveinfo.h"
 #include <QTextCodec>
 #include <QVBoxLayout>
 #include <QPointer>
@@ -31,6 +32,7 @@ public:
     ~MainWindow();
     void flush(); //更新事件显示
     void setText(const std::string& text); //设置事件描述
+    std::string getText();
 
     void emitButtonClicked0() {
         setText("选择了选项:");
@@ -54,6 +56,9 @@ public:
     }
     void closeEvent(QCloseEvent *event);
 
+private slots:
+    void on_actionsave_triggered();
+
 private:
     Ui::MainWindow *ui;
     Controller *controller;
@@ -65,9 +70,11 @@ private:
     void initAttrTable();
     void updateAttr();
     void initController();
+    void initMenuBar();
     void initButtons(); //连接到按钮
     bool loadCurrentEvent(); //读取当前事件
     void setTable(int, int, std::string);
     void flushTable();
+
 };
 #endif // MAINWINDOW_H

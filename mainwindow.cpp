@@ -1,9 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "event.h"
+#include "loadsave.h"
+#include "textcode.h"
 #include <QCloseEvent>
-
-QTextCodec *codec = QTextCodec::codecForName("GBK");
+#include <QMenu>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     initButtons();
     initController();
     initAttrTable();
+    initMenuBar();
     flush();
     qDebug() << "Initialization End.";
 }
@@ -22,6 +24,10 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::initMenuBar() {
+
 }
 
 void MainWindow::initController() {
@@ -42,6 +48,10 @@ void MainWindow::setText(const std::string& text) {
     //qDebug() << message.c_str();
     ui->textBrowser->insertPlainText(codec->toUnicode(message.c_str()));
     ui->textBrowser->moveCursor(QTextCursor::End);
+}
+
+std::string MainWindow::getText() {
+    return ui->textBrowser->toPlainText().toStdString();
 }
 
 void MainWindow::initAttrTable() {
@@ -128,6 +138,16 @@ bool MainWindow::loadCurrentEvent() {
     return true;
 }
 
-void MainWindow::closeEvent(QCloseEvent *event) {
-    parentWidget()->show();
+void MainWindow::closeEvent(QCloseEvent*) {
+    //parentWidget()->show();
+}
+
+void MainWindow::on_actionsave_triggered() {
+    SaveInfo info = SaveInfo::getCurrentSaveInfo(controller->getMainCharacter(), getText());
+    LoadSave *loadsave = new LoadSave(this, true);
+    loadsave->setWindowFlag(Qt::Window);
+    loadsave->setAttribute(Qt::WA_DeleteOnClose);
+    loadsave->setWindowModality(Qt::ApplicationModal);
+    loadsave->setInfo(info);
+    loadsave->show();
 }

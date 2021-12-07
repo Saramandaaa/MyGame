@@ -1,11 +1,14 @@
 #include "loadsave.h"
 #include "ui_loadsave.h"
+#include "textcode.h"
 #include <QDebug>
 #include <assert.h>
+#include "saveinfo.h"
+#include <QMessageBox>
 
-LoadSave::LoadSave(QWidget *parent)
+LoadSave::LoadSave(QWidget *parent, bool is_save_mode)
     : QWidget(parent)
-    , ui(new Ui::LoadSave)
+    , ui(new Ui::LoadSave), save_mode(is_save_mode)
 {
     ui->setupUi(this);
     saves = ui->saves;
@@ -26,35 +29,73 @@ void LoadSave::initSaves() {
 
 void LoadSave::flush() {
     saves->clear();
-    saves->addItem(new QListWidgetItem("asda"));
-    saves->addItem(new QListWidgetItem("asdas"));
-    saves->addItem(new QListWidgetItem("asdaasdas"));
-    saves->addItem(new QListWidgetItem("asdadsaasdad"));
-    saves->addItem(new QListWidgetItem("asdadsaasdasdsad"));
+    if (save_mode) saves->addItem(new QListWidgetItem(codec->toUnicode("新存档")));
+    FileList Flist;
+    for (int i = 0; i < (int)Flist.vectorlist.size(); i++) {
+        std::string readname = "存档时间: " + Flist.readable(Flist.vectorlist[i]);
+        saves->addItem(new QListWidgetItem(codec->toUnicode(readname.c_str())));
+    }
+    confirm->setDisabled(true);
 }
 
 void LoadSave::specific_saves_selected() {
     confirm->setDisabled(false);
 }
 
-void LoadSave::on_confirm_clicked()
+void LoadSave::on_confirm_clicked() //点击确认后
 {
     assert (saves->currentItem() != nullptr);
-    qDebug() << "Confirm!";
-    qDebug() << saves->currentItem()->text();
+    //qDebug() << "Confirm!";
+    //qDebug() << saves->currentItem()->text();
+    int id = saves->currentRow();
+    FileList Flist;
+    if (save_mode) {
+        if (id == 0) { //新存档
+            if (Flist.save_to_new(info)) {
+                flush();
+            }
+            else {
+                //save new error
+            }
+        }
+        else { //覆盖旧存档
+            QMessageBox::StandardButton result = QMessageBox::question(this, codec->toUnicode("提示"), codec->toUnicode("将覆盖存档，确认继续？"));
+            if (result == QMessageBox::Yes) {
+                if (Flist.save_to(info, Flist.vectorlist[id - 1])) {
+                    flush();
+                }
+                else {
+                    //save error
+                }
+            }
+        }
+    }
+    else { //读取存档
+        if (Flist.load_from(info, Flist.vectorlist[id])) {
+
+        }
+        else {
+            //load error
+        }
+    }
 }
 
-void LoadSave::on_cancel_clicked()
-{
+void LoadSave::setInfo(SaveInfo in) {
+    info = in;
+}
+
+SaveInfo LoadSave::getInfo() {
+    return info;
+}
+
+void LoadSave::on_cancel_clicked() {
     close();
 }
 
-void LoadSave::on_flush_clicked()
-{
+void LoadSave::on_flush_clicked() {
     flush();
-    confirm->setDisabled(true);
 }
 
-void LoadSave::closeEvent(QCloseEvent *event) {
-    parentWidget()->show();
+void LoadSave::closeEvent(QCloseEvent*) {
+    //parentWidget()->show();
 }

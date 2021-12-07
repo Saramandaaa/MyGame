@@ -1,8 +1,11 @@
 #include "eventlist.h"
 #include "event.h"
 #include "dailyevent.h"
+#include <ctime>
 
 int id = 0;
+
+RandSummoner EventList::rs((int)time(NULL));
 
 Event* EventList::getNewEvent(const Character* c) {
     id++;

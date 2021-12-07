@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QListWidget>
 #include <QListWidgetItem>
+#include "saveinfo.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class LoadSave; }
@@ -14,9 +15,11 @@ class LoadSave : public QWidget {
     Q_OBJECT
 
 public:
-    explicit LoadSave(QWidget *parent = nullptr);
+    explicit LoadSave(QWidget *parent = nullptr, bool is_save_mode = false);
     ~LoadSave();
     void closeEvent(QCloseEvent *event);
+    void setInfo(SaveInfo);
+    SaveInfo getInfo();
 
 private slots:
     void specific_saves_selected();
@@ -31,6 +34,8 @@ private:
     Ui::LoadSave *ui;
     QListWidget *saves;
     QPushButton *confirm;
+    bool save_mode;
+    SaveInfo info;
 
     void initSaves();
     void flush();

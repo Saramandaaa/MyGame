@@ -64,10 +64,22 @@
     <property name="title">
      <string>选项</string>
     </property>
+    <addaction name="actionsetup"/>
+    <addaction name="actionsave"/>
    </widget>
    <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionsetup">
+   <property name="text">
+    <string>设置</string>
+   </property>
+  </action>
+  <action name="actionsave">
+   <property name="text">
+    <string>保存</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
