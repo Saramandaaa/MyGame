@@ -13,6 +13,7 @@ class Character {
 public:
     //初始属性全为0
     Character();
+    Character(attr);
     ~Character();
 
     // 以attr的类型输出角色属性

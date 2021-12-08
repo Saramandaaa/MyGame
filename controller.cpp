@@ -39,3 +39,12 @@ Character Controller::getMainCharacter() {
 bool Controller::isReady() {
     return currentEvent != nullptr && mainCharacter != nullptr;
 }
+
+void Controller::setMainCharacter(Attribute c) {
+    delete mainCharacter;
+    mainCharacter = new Character(c);
+}
+
+void Controller::setCurrentEvent(Event *event) {
+    currentEvent = event;
+}

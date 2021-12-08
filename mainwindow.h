@@ -29,6 +29,7 @@ signals:
     void buttonClicked(int option, void* w);
 public:
     MainWindow(QWidget *parent = nullptr);
+    MainWindow(SaveInfo info, QWidget *parent = nullptr);
     ~MainWindow();
     void flush(); //更新事件显示
     void setText(const std::string& text); //设置事件描述
@@ -67,6 +68,7 @@ private:
     QVBoxLayout *buttonsLayout;
     QTableWidget *table;
 
+    void initFromSaveInfo(SaveInfo);
     void initAttrTable();
     void updateAttr();
     void initController();

@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <assert.h>
 #include "saveinfo.h"
+#include "startmenu.h"
 #include <QMessageBox>
 
 LoadSave::LoadSave(QWidget *parent, bool is_save_mode)
@@ -72,7 +73,8 @@ void LoadSave::on_confirm_clicked() //点击确认后
     }
     else { //读取存档
         if (Flist.load_from(info, Flist.vectorlist[id])) {
-
+            emit_save_info_loaded();
+            close();
         }
         else {
             //load error

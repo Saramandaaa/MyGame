@@ -3,6 +3,7 @@
 #include "event.h"
 #include "loadsave.h"
 #include "textcode.h"
+#include "eventlist.h"
 #include <QCloseEvent>
 #include <QMenu>
 
@@ -21,6 +22,21 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug() << "Initialization End.";
 }
 
+MainWindow::MainWindow(SaveInfo info, QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    optionNum = 0;
+    buttonsLayout = nullptr;
+    initButtons();
+    initController();
+    initAttrTable();
+    initMenuBar();
+    initFromSaveInfo(info);
+    qDebug() << "Initialization From Save End.";
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -37,8 +53,23 @@ void MainWindow::initController() {
     controller->init();
 }
 
+void MainWindow::initFromSaveInfo(SaveInfo info) {
+    controller->setMainCharacter(info.attribute);
+    EventList::load(info);
+    controller->setCurrentEvent(EventList::getLastEvent());
+    ui->textBrowser->setText(codec->toUnicode(info.message.c_str()));
+    if (!loadCurrentEvent()) {
+        qDebug() << "loadCurrentEvent Error!";
+        return;
+    }
+    flushTable();
+}
+
 void MainWindow::flush() {
-    if (!loadCurrentEvent()) return;
+    if (!loadCurrentEvent()) {
+        qDebug() << "loadCurrentEvent Error!";
+        return;
+    }
     setText(this->controller->getCurrentEvent().getText() + '\n');
     flushTable();
 }
@@ -123,7 +154,7 @@ bool MainWindow::loadCurrentEvent() {
 
     Event event = controller->getCurrentEvent();
 
-    qDebug() << "Changing buttons' status...";
+    //qDebug() << "Changing buttons' status...";
     optionNum = event.optionSet.size();
     for (int i = 0; i < optionNum; i++) {
         buttons[i]->setText(codec->toUnicode(event.optionSet.findOption(i)->second.c_str()));
@@ -134,7 +165,7 @@ bool MainWindow::loadCurrentEvent() {
         buttons[i]->setDisabled(true);
     }
 
-    qDebug() << "Done.";
+    //qDebug() << "Done.";
     return true;
 }
 

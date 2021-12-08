@@ -2,6 +2,7 @@
 #define STARTMENU_H
 
 #include <QWidget>
+#include "saveinfo.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class StartMenu; }
@@ -13,7 +14,10 @@ class StartMenu : public QWidget {
 public:
     explicit StartMenu(QWidget *parent = nullptr);
     ~StartMenu();
-    void StartGame();
+    void startGame(bool from_save = false);
+    void setInfo(SaveInfo);
+    SaveInfo getInfo();
+
 private slots:
     void on_exit_clicked();
 
@@ -21,8 +25,11 @@ private slots:
 
     void on_loadsaves_clicked();
 
+    void continue_from_save();
+
 private:
     Ui::StartMenu *ui;
+    SaveInfo info;
 };
 
 #endif // STARTMENU_H

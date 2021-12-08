@@ -15,6 +15,9 @@ Character::Character() {
     attribute[AttributeEnum::affair3] = -1;
     attribute[AttributeEnum::affair4] = -1;
 }
+Character::Character(attr a) {
+    attribute = a;
+}
 Character::~Character() {
 
 }

@@ -13,6 +13,8 @@ public:
     bool isReady();
     Event getCurrentEvent();
     Character getMainCharacter();
+    void setMainCharacter(Attribute);
+    void setCurrentEvent(Event*);
     Controller();
 private:
     Event* currentEvent;
