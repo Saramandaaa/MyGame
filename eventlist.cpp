@@ -1,6 +1,6 @@
 #include "eventlist.h"
 #include "event.h"
-#include "dailyevent.h"
+#include "DailyEvent/dailyevent.h"
 #include <ctime>
 
 int id = 0;

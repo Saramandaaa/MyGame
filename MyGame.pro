@@ -31,10 +31,24 @@ SOURCES += \
     textcode.cpp
 
 HEADERS += \
+    ConstantEvent/entranceExam.h \
+    ConstantEvent/finalTermExam.h \
+    ConstantEvent/midTermExam.h \
+    DailyEvent/dailyevent.h \
+    FinalEvent/baoyan.h \
+    FinalEvent/withdraw.h \
+    FinalEvent/work.h \
+    RandomEvent/innovateProgram.h \
+    RandomEvent/joinCorporation.h \
+    RandomEvent/love.h \
+    RandomEvent/mentalDisease.h \
+    RandomEvent/physicalDisease.h \
+    RandomEvent/prp.h \
+    RandomEvent/sayGoodBye.h \
+    RandomEvent/voteStudentAssociation.h \
     attribute.h \
     character.h \
     controller.h \
-    dailyevent.h \
     event.h \
     eventlist.h \
     loadsave.h \
