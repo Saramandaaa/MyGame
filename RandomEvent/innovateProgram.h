@@ -1,0 +1,51 @@
+#include<string>
+#include<assert.h>
+
+#include "attribute.h"
+#include "Character.h"
+#include "event.h"
+
+//触发条件：总知识水平能力>=85(当前学期数-1)、每个学期（第一学期除外）开始
+//开启daily_event_novationtask，限时三个学期
+//压力下限+0.3（完成时归0）
+//完成条件：完成13次daily_event_novationtask
+//完成奖励：科研经历+2；总知识水平能力delta=完成daily_event_prptask次数*6
+//注：prp与innovate_program不共存
+class InnovateProgram : public Event
+{
+	attr innovateProgramJoin(const Character* character) const;
+	attr innovateProgramNotJoin(const Character* character) const;
+
+public:
+	InnovateProgram(const std::string& text);
+
+	attr getDelta(const Character* character, const int option) const;
+	
+};
+
+InnovateProgram::InnovateProgram(const std::string& text) {
+	changeText(text);
+
+	optionSet.insertOption(0, "参加");
+	optionSet.insertOption(1, "不参加");
+}
+
+attr InnovateProgram::getDelta(const Character* character, const int option) const {
+	attr result;
+	if (option == 0) result = innovateProgramJoin(character);
+	else if (option == 1) result = innovateProgramNotJoin(character);
+	else assert(false);
+	return result;
+}
+
+attr InnovateProgram::innovateProgramJoin(const Character* character) const {
+	attr delta;
+	delta[AttributeEnum::is_of_novation] = 1;
+	delta[AttributeEnum::bottom_of_pressure] = 0.3;
+	return delta;
+}
+
+attr InnovateProgram::innovateProgramNotJoin(const Character* character) const {
+	attr delta;
+	return delta;
+}
