@@ -22,13 +22,13 @@ int& Attribute::operator[](const AttributeEnum attributeEnum) {
 	return attributes[(int)attributeEnum];
 }
 void Attribute::operator+=(Attribute other) {
+    for (int i = 0; i < 5; i++) {
+        attributes[i] = other[i];
+    }
     assert(other.isDelta);
-    for (int i = 0; i < 19; i++) {
+    for (int i = 5; i < ATTR_AMT; i++) {
         attributes[i] += other[i];
         if (attributes[i] < 0) attributes[i] = 0;
-    }
-    for (int i = 19; i < ATTR_AMT; i++) {
-        attributes[i] = other[i];
     }
     //调整存在上限的值
     if ((*this)[AttributeEnum::physical_quality] > (*this)[AttributeEnum::top_of_physical_quality])

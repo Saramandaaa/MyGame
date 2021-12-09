@@ -5,36 +5,37 @@
 #include <cstdio>
 
 // 定义了double类属性的数量
-#define ATTR_AMT 24
+#define ATTR_AMT ((int)AttributeEnum::attribute_end)
 typedef int ATTR_TYPE; //存放属性的变量类型
 
 // 定义了double类属性的id，请务必与ATTR_AMT同步更新，建议在枚举类型后指明对应的int数
 enum class AttributeEnum
 {
-    physical_quality = 0,
-    top_of_physical_quality = 1,
-    pressure = 2,
-    bottom_of_pressure = 3,
-    study_rate = 4,
-    top_of_study_rate = 5,
-    knowledge = 6,
-    all_knowledge = 7,
-    scientific_research_time = 8,
-    social = 9,
-    term = 10,
-    is_of_prp = 11,
-    is_of_love = 12,
-    is_of_novation = 13,
-    number_love = 14,
-    time_love = 15,
-    number_prp = 16,
-    number_novation = 17,
-    failedCourseAmt = 18,
-    affair0 = 19,
-    affair1 = 20,
-    affair2 = 21,
-    affair3 = 22,
-    affair4 = 23,
+    affair0 = 0,
+    affair1 = 1,
+    affair2 = 2,
+    affair3 = 3,
+    affair4 = 4,
+    physical_quality = 5,
+    top_of_physical_quality = 6,
+    pressure = 7,
+    bottom_of_pressure = 8,
+    study_rate = 9,
+    top_of_study_rate = 10,
+    knowledge = 11,
+    all_knowledge = 12,
+    scientific_research_time = 13,
+    social = 14,
+    term = 15,
+    is_of_prp = 16,
+    is_of_love = 17,
+    is_of_novation = 18,
+    number_love = 19,
+    time_love = 20,
+    number_prp = 21,
+    number_novation = 22,
+    failedCourseAmt = 23,
+    attribute_end
 };
 /*
     double physical_quality;              //身体素质（可见)   身体素质<（上限-下限）*0.2 报警
