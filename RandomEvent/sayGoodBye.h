@@ -2,7 +2,7 @@
 #include<assert.h>
 
 #include "attribute.h"
-#include "Character.h"
+#include "character.h"
 #include "event.h"
 
 //´¥·¢¸ÅÂÊ=0.1
@@ -21,6 +21,7 @@ public:
 };
 
 SayGoodBye::SayGoodBye(const std::string& text) {
+    type = EventEnum::sayGoodBye;
 	changeText(text);
 
 	optionSet.insertOption(0, "¼ÌÐø");

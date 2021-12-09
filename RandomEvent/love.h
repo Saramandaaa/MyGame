@@ -19,10 +19,10 @@ public:
 
 	attr getDelta(const Character* character, const int option) const;
 
-
 };
 
 Love::Love(const std::string& text) {
+    type = EventEnum::Love;
 	changeText(text);
 
 	optionSet.insertOption(0, "Ω” ‹");
@@ -43,7 +43,7 @@ attr Love::loveAccept(const Character* character) const {
 	return delta;
 }
 
-attr Love::loveRefuse(const Character* character) const {
+attr Love::loveRefuse(const Character*) const {
 	attr delta;
 	return delta;
 }

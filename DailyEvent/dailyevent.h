@@ -29,15 +29,18 @@ private:
 };
 
 DailyEvent::DailyEvent(const std::string t) {
+    type = EventEnum::BasicDailyEvent;
     changeText(t);
     optionSet.insertOption(0, "学习");
     optionSet.insertOption(1, "运动");
     optionSet.insertOption(2, "娱乐");
 }
 void DailyEvent::addPrp() {
+    type = EventEnum::PrpDailyEvent;
     optionSet.insertOption(3, "进行PRP活动");
 }
 void DailyEvent::addNovation() {
+    type = EventEnum::InnovateProgramDailyEvent;
     optionSet.insertOption(4, "进行大创活动");
 }
 

@@ -2,7 +2,7 @@
 #include<assert.h>
 
 #include "attribute.h"
-#include "Character.h"
+#include "character.h"
 #include "event.h"
 
 //触发条件：总知识水平能力>=85(当前学期数-1)、每个学期（第一学期除外）开始
@@ -24,8 +24,8 @@ public:
 };
 
 InnovateProgram::InnovateProgram(const std::string& text) {
+    type = EventEnum::InnovateProgram;
 	changeText(text);
-
 	optionSet.insertOption(0, "参加");
 	optionSet.insertOption(1, "不参加");
 }
@@ -38,14 +38,14 @@ attr InnovateProgram::getDelta(const Character* character, const int option) con
 	return result;
 }
 
-attr InnovateProgram::innovateProgramJoin(const Character* character) const {
+attr InnovateProgram::innovateProgramJoin(const Character*) const {
 	attr delta;
 	delta[AttributeEnum::is_of_novation] = 1;
-	delta[AttributeEnum::bottom_of_pressure] = 0.3;
+    delta[AttributeEnum::bottom_of_pressure] = 30;
 	return delta;
 }
 
-attr InnovateProgram::innovateProgramNotJoin(const Character* character) const {
+attr InnovateProgram::innovateProgramNotJoin(const Character*) const {
 	attr delta;
 	return delta;
 }

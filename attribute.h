@@ -5,7 +5,7 @@
 #include <cstdio>
 
 // 定义了double类属性的数量
-#define ATTR_AMT 23
+#define ATTR_AMT 24
 typedef int ATTR_TYPE; //存放属性的变量类型
 
 // 定义了double类属性的id，请务必与ATTR_AMT同步更新，建议在枚举类型后指明对应的int数
@@ -29,11 +29,12 @@ enum class AttributeEnum
     time_love = 15,
     number_prp = 16,
     number_novation = 17,
-    affair0 = 18,
-    affair1 = 19,
-    affair2 = 20,
-    affair3 = 21,
-    affair4 = 22,
+    failedCourseAmt = 18,
+    affair0 = 19,
+    affair1 = 20,
+    affair2 = 21,
+    affair3 = 22,
+    affair4 = 23,
 };
 /*
     double physical_quality;              //身体素质（可见)   身体素质<（上限-下限）*0.2 报警

@@ -44,6 +44,7 @@ public:
     Event() {};
     Event(const std::string& t) : text(t) {};
     OptionSet optionSet;
+    EventEnum type;
 private:
     std::string text;
 };

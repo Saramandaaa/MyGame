@@ -2,7 +2,7 @@
 #include<assert.h>
 
 #include "attribute.h"
-#include "Character.h"
+#include "character.h"
 #include "event.h"
 
 //本学期知识水平输出，期中成绩=本学期知识水平*50(大于100也即100);
@@ -22,6 +22,7 @@ public:
 };
 
 FinalTermExam::FinalTermExam(const std::string& text) {
+    type = EventEnum::finalTermExam;
 	changeText(text);
 	optionSet.insertOption(0, "继续");
 }
@@ -35,9 +36,9 @@ attr FinalTermExam::getDelta(const Character* character, const int option) const
 
 attr FinalTermExam::finalTermExamNormallyAttend(const Character* character) const {
 	attr delta;
-	int finalExamGrade = delta[AttributeEnum::all_knowledge];
+    int finalExamGrade = character->getSingleAttribute(AttributeEnum::all_knowledge);
 	if (finalExamGrade < 60) {
-		delta[AttributeEnum::bottom_of_pressure] = 0.4;
+        delta[AttributeEnum::bottom_of_pressure] = 40;
 		delta[AttributeEnum::failedCourseAmt] = 1;
 	}
 	return delta;

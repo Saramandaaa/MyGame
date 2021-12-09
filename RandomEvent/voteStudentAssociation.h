@@ -22,6 +22,7 @@ public:
 };
 
 VoteStudentAssociation::VoteStudentAssociation(const std::string& text) {
+    type = EventEnum::VoteStudentAssociation;
 	changeText(text);
 
 	optionSet.insertOption(0, "²Î¼Ó");
@@ -36,13 +37,13 @@ attr VoteStudentAssociation::getDelta(const Character* character, const int opti
 	return result;
 }
 
-attr VoteStudentAssociation::voteStudentAssociationJoin(const Character* character) const {
+attr VoteStudentAssociation::voteStudentAssociationJoin(const Character*) const {
 	attr delta;
 	delta[AttributeEnum::study_rate] = 100;
 	return delta;
 }
 
-attr VoteStudentAssociation::voteStudentAssociationNotJoin(const Character* character) const {
+attr VoteStudentAssociation::voteStudentAssociationNotJoin(const Character*) const {
 	attr delta;
 	return delta;
 }

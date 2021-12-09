@@ -20,6 +20,7 @@ public:
 };
 
 JoinCorporation::JoinCorporation(const std::string& text) {
+    type = EventEnum::JoinCorporation;
 	changeText(text);
 
 	optionSet.insertOption(0, "º”»Î");
@@ -33,12 +34,12 @@ attr JoinCorporation::getDelta(const Character* character, const int option) con
 	else assert(false);
 	return result;
 }
-attr JoinCorporation::joinCorporationJoin(const Character* character) const {
+attr JoinCorporation::joinCorporationJoin(const Character*) const {
 	attr delta;
 	delta[AttributeEnum::study_rate] = 100;
 	return delta;
 }
-attr JoinCorporation::joinCorporationNotJoin(const Character* character) const {
+attr JoinCorporation::joinCorporationNotJoin(const Character*) const {
 	attr delta;
 	return delta;
 }

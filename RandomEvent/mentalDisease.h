@@ -2,7 +2,7 @@
 #include<assert.h>
 
 #include "attribute.h"
-#include "Character.h"
+#include "character.h"
 #include "event.h"
 
 //触发概率=压力
@@ -21,6 +21,7 @@ public:
 };
 
 MentalDisease::MentalDisease(const std::string& text) {
+    type = EventEnum::mentalDisease;
 	changeText(text);
 
 	optionSet.insertOption(0, "继续");
@@ -35,7 +36,7 @@ attr MentalDisease::getDelta(const Character* character, const int option) const
 
 attr MentalDisease::mentalDiseaseContinue(const Character* character) const {
 	attr delta;
-	delta[AttributeEnum::bottom_of_pressure] = 0.1;
-	delta[AttributeEnum::pressure] = 0.1;
+    delta[AttributeEnum::bottom_of_pressure] = 10;
+    delta[AttributeEnum::pressure] = 10;
 	return delta;
 }

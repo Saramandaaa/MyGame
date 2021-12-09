@@ -2,7 +2,7 @@
 #include<assert.h>
 
 #include "attribute.h"
-#include "Character.h"
+#include "character.h"
 #include "event.h"
 
 //触发概率=（身体素质上限-当前身体素质）/（身体素质上限）+（1-身体素质上限）
@@ -20,6 +20,7 @@ public:
 };
 
 PhysicalDisease::PhysicalDisease(const std::string& text) {
+    type = EventEnum::physicalDisease;
 	changeText(text);
 
 	optionSet.insertOption(0, "继续");
@@ -32,7 +33,7 @@ attr PhysicalDisease::getDelta(const Character* character, const int option) con
 	return result;
 }
 
-attr PhysicalDisease::physicalDiseaseContinue(const Character* character) const {
+attr PhysicalDisease::physicalDiseaseContinue(const Character*) const {
 	attr delta;
 	delta[AttributeEnum::top_of_physical_quality] = -10;
 	delta[AttributeEnum::physical_quality] = -10;

@@ -2,7 +2,7 @@
 #include<assert.h>
 
 #include "attribute.h"
-#include "Character.h"
+#include "character.h"
 #include "event.h"
 
 class Work : public Event
@@ -17,6 +17,7 @@ public:
 };
 
 Work::Work(const std::string& text) {
+    type = EventEnum::Work;
 	changeText(text);
 
 	optionSet.insertOption(0, "¼ÌÐø");
@@ -29,7 +30,7 @@ attr Work::getDelta(const Character* character, const int option) const {
 	return result;
 }
 
-attr Work::workContinue(const Character* character) const {
+attr Work::workContinue(const Character*r) const {
 	attr delta;
 	return delta;
 }

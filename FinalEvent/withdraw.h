@@ -2,7 +2,7 @@
 #include<assert.h>
 
 #include "attribute.h"
-#include "Character.h"
+#include "character.h"
 #include "event.h"
 
 class Withdraw : public Event
@@ -17,6 +17,7 @@ public:
 };
 
 Withdraw::Withdraw(const std::string& text) {
+    type = EventEnum::Withdraw;
 	changeText(text);
 
 	optionSet.insertOption(0, "¼ÌÐø");
@@ -29,7 +30,7 @@ attr Withdraw::getDelta(const Character* character, const int option) const {
 	return result;
 }
 
-attr Withdraw::withdrawContinue(const Character* character) const {
+attr Withdraw::withdrawContinue(const Character*) const {
 	attr delta;
 	return delta;
 }

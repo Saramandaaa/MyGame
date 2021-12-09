@@ -2,7 +2,7 @@
 #include<assert.h>
 
 #include "attribute.h"
-#include "Character.h"
+#include "character.h"
 #include "event.h"
 
 class Baoyan : public Event
@@ -17,6 +17,7 @@ public:
 };
 
 Baoyan::Baoyan(const std::string& text) {
+    type = EventEnum::Baoyan;
 	changeText(text);
 
 	optionSet.insertOption(0, "¼ÌÐø");
@@ -29,7 +30,7 @@ attr Baoyan::getDelta(const Character* character, const int option) const {
 	return result;
 }
 
-attr Baoyan::baoyanContinue(const Character* character) const {
+attr Baoyan::baoyanContinue(const Character*) const {
 	attr delta;
 	return delta;
 }

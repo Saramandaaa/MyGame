@@ -23,11 +23,11 @@ int& Attribute::operator[](const AttributeEnum attributeEnum) {
 }
 void Attribute::operator+=(Attribute other) {
     assert(other.isDelta);
-    for (int i = 0; i < 18; i++) {
+    for (int i = 0; i < 19; i++) {
         attributes[i] += other[i];
         if (attributes[i] < 0) attributes[i] = 0;
     }
-    for (int i = 18; i < ATTR_AMT; i++) {
+    for (int i = 19; i < ATTR_AMT; i++) {
         attributes[i] = other[i];
     }
     //调整存在上限的值

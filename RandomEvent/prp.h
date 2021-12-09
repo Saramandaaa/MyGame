@@ -2,7 +2,7 @@
 #include<assert.h>
 
 #include "attribute.h"
-#include "Character.h"
+#include "character.h"
 #include "event.h"
 
 //触发条件：总知识水平能力>=80(当前学期数-1)、每个学期（第一学期除外）开始
@@ -25,6 +25,7 @@ public:
 };
 
 Prp::Prp(const std::string& text) {
+    type = EventEnum::Prp;
 	changeText(text);
 
 	optionSet.insertOption(0, "参加");
@@ -39,14 +40,14 @@ attr Prp::getDelta(const Character* character, const int option) const {
 	return result;
 }
 
-attr Prp::prpJoin(const Character* character) const {
+attr Prp::prpJoin(const Character*) const {
 	attr delta;
-	delta[AttributeEnum::bottom_of_pressure] = 0.2;
+    delta[AttributeEnum::bottom_of_pressure] = 20;
 	delta[AttributeEnum::is_of_prp] = 1;
 	return delta;
 }
 
-attr Prp::prpNotJoin(const Character* character) const {
+attr Prp::prpNotJoin(const Character*) const {
 	attr delta;
 	return delta;
 }
