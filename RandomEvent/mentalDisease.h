@@ -34,7 +34,7 @@ attr MentalDisease::getDelta(const Character* character, const int option) const
 	return result;
 }
 
-attr MentalDisease::mentalDiseaseContinue(const Character* character) const {
+attr MentalDisease::mentalDiseaseContinue(const Character*) const {
 	attr delta;
     delta[AttributeEnum::bottom_of_pressure] = 10;
     delta[AttributeEnum::pressure] = 10;

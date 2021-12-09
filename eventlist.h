@@ -11,9 +11,9 @@ public:
     static Event* getNewEvent(const Character*);
     static RandSummoner rs;
     static void load(SaveInfo);
-    static Event* getLastEvent();
+    static Event* getEvent(EventEnum);
 private:
-
+    static Event* getDailyEvent(const Character*);
 };
 
 #endif // EVENTLIST_H

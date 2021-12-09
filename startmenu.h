@@ -25,7 +25,7 @@ private slots:
 
     void on_loadsaves_clicked();
 
-    void continue_from_save();
+    void continue_from_save(SaveInfo);
 
 private:
     Ui::StartMenu *ui;

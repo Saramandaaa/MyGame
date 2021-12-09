@@ -11,7 +11,7 @@ public:
     void run(const int, const void*);
     void init();
     bool isReady();
-    Event getCurrentEvent();
+    Event* getCurrentEvent();
     Character getMainCharacter();
     void setMainCharacter(Attribute);
     void setCurrentEvent(Event*);

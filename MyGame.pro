@@ -50,6 +50,7 @@ HEADERS += \
     character.h \
     controller.h \
     event.h \
+    eventheader.h \
     eventlist.h \
     loadsave.h \
     mainwindow.h \

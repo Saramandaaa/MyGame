@@ -5,20 +5,22 @@
 #include <QDataStream>
 #include <assert.h>
 #include <QDateTime>
+#include "textcode.h"
 
 SaveInfo::SaveInfo() {
 
 }
 
-SaveInfo::SaveInfo(Character c, RandSummoner rs, std::string text) {
+SaveInfo::SaveInfo(Character c, RandSummoner rs, EventEnum type, std::string text) {
     attribute = c.getAttributes();
     seed = rs.getSeed();
     stepAMT = rs.getStepAmt();
+    eventType = type;
     message = text;
 }
 
-SaveInfo SaveInfo::getCurrentSaveInfo(Character c, std::string message) {
-    return SaveInfo(c, EventList::rs, message);
+SaveInfo SaveInfo::getCurrentSaveInfo(Character c, Event* event, std::string message) {
+    return SaveInfo(c, EventList::rs, event->type, message);
 }
 
 bool SaveInfo::output(QFile* file) {
@@ -28,7 +30,8 @@ bool SaveInfo::output(QFile* file) {
         out << attribute.attributes[i];
     out << seed;
     out << stepAMT;
-    out << (QString)message.c_str();
+    out << (int)eventType;
+    out << codec->fromUnicode(message.c_str());
     return true;
 }
 
@@ -43,10 +46,16 @@ bool SaveInfo::input(QFile* file) {
     if (in.status() != QDataStream::Ok) return false;
     in >> stepAMT;
     if (in.status() != QDataStream::Ok) return false;
-    QString text;
+    int tmp;
+    in >> tmp;
+    if (in.status() != QDataStream::Ok) return false;
+    eventType = (EventEnum)tmp;
+
+    QByteArray text;
     in >> text;
     if (in.status() != QDataStream::Ok) return false;
-    message = text.toStdString();
+
+    message = codec->toUnicode(text).toStdString();
     return true;
 }
 

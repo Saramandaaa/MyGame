@@ -30,7 +30,7 @@ attr Work::getDelta(const Character* character, const int option) const {
 	return result;
 }
 
-attr Work::workContinue(const Character*r) const {
+attr Work::workContinue(const Character*) const {
 	attr delta;
 	return delta;
 }

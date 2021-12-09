@@ -29,8 +29,8 @@ void Controller::run(const int option, const void* w) {
     ((MainWindow*)w)->flush();
 }
 
-Event Controller::getCurrentEvent() {
-    return *this->currentEvent;
+Event* Controller::getCurrentEvent() {
+    return this->currentEvent;
 }
 Character Controller::getMainCharacter() {
     return *this->mainCharacter;

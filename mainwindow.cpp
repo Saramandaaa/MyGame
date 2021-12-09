@@ -54,10 +54,11 @@ void MainWindow::initController() {
 }
 
 void MainWindow::initFromSaveInfo(SaveInfo info) {
-    controller->setMainCharacter(info.attribute);
     EventList::load(info);
-    controller->setCurrentEvent(EventList::getLastEvent());
-    ui->textBrowser->setText(codec->toUnicode(info.message.c_str()));
+    controller->setMainCharacter(info.attribute);
+    controller->setCurrentEvent(EventList::getEvent(info.eventType));
+    ui->textBrowser->setText(info.message.c_str());
+    ui->textBrowser->moveCursor(QTextCursor::End);
     if (!loadCurrentEvent()) {
         qDebug() << "loadCurrentEvent Error!";
         return;
@@ -70,7 +71,7 @@ void MainWindow::flush() {
         qDebug() << "loadCurrentEvent Error!";
         return;
     }
-    setText(this->controller->getCurrentEvent().getText() + '\n');
+    setText(this->controller->getCurrentEvent()->getText() + '\n');
     flushTable();
 }
 
@@ -152,12 +153,12 @@ void MainWindow::initButtons() {
 bool MainWindow::loadCurrentEvent() {
     if (!controller || !controller->isReady()) return false;
 
-    Event event = controller->getCurrentEvent();
+    Event* event = controller->getCurrentEvent();
 
     //qDebug() << "Changing buttons' status...";
-    optionNum = event.optionSet.size();
+    optionNum = event->optionSet.size();
     for (int i = 0; i < optionNum; i++) {
-        buttons[i]->setText(codec->toUnicode(event.optionSet.findOption(i)->second.c_str()));
+        buttons[i]->setText(codec->toUnicode(event->optionSet.findOption(i)->second.c_str()));
         buttons[i]->setDisabled(false);
     }
     for (int i = optionNum; i < MAX_OPTION_NUM; i++) {
@@ -174,7 +175,7 @@ void MainWindow::closeEvent(QCloseEvent*) {
 }
 
 void MainWindow::on_actionsave_triggered() {
-    SaveInfo info = SaveInfo::getCurrentSaveInfo(controller->getMainCharacter(), getText());
+    SaveInfo info = SaveInfo::getCurrentSaveInfo(controller->getMainCharacter(), controller->getCurrentEvent(), getText());
     LoadSave *loadsave = new LoadSave(this, true);
     loadsave->setWindowFlag(Qt::Window);
     loadsave->setAttribute(Qt::WA_DeleteOnClose);

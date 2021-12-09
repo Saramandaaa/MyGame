@@ -1,6 +1,7 @@
 #ifndef SAVEINFO_H
 #define SAVEINFO_H
 
+#include "event.h"
 #include "character.h"
 #include "randsummoner.h"
 #include <string>
@@ -12,15 +13,16 @@
 class SaveInfo {
 public:
     SaveInfo();
-    SaveInfo(Character, RandSummoner rs, std::string);
+    SaveInfo(Character, RandSummoner rs, EventEnum type, std::string);
     attr attribute;
     int seed, stepAMT;
+    EventEnum eventType;
     std::string message;
 
     bool output(QFile*);
     bool input(QFile*);
 
-    static SaveInfo getCurrentSaveInfo(Character, std::string);
+    static SaveInfo getCurrentSaveInfo(Character, Event*, std::string);
 };
 
 const QString SaveDir = QDir::currentPath() + QDir::separator() + "saves";

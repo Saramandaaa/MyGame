@@ -58,6 +58,7 @@ void StartMenu::on_loadsaves_clicked() {
     //hide();
 }
 
-void StartMenu::continue_from_save() {
+void StartMenu::continue_from_save(SaveInfo in) {
+    setInfo(in);
     startGame(true);
 }
