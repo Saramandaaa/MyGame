@@ -71,6 +71,9 @@ double DailyEvent::getWeight(const Character* character) const {
     case EventEnum::InnovateProgramDailyEvent:
         if (!character->getSingleAttribute(AttributeEnum::is_of_novation)) return 0;
         break;
+    default:
+        assert(false);
+        break;
     }
     return weight * 0.01;
 }

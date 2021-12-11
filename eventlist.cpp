@@ -23,7 +23,6 @@ Event* EventList::getNewEvent(const Character* c) {
 
     Event* result = getEvent((EventEnum)eventType);
 
-
     delete[] weights;
     return result;
 }

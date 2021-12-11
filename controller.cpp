@@ -13,6 +13,8 @@ Controller::Controller() {
 void Controller::init() {
     mainCharacter = new Character();
     currentEvent = EventList::getNewEvent(mainCharacter);
+    currentEvent->optionSet.clearOption();
+    currentEvent->optionSet.insertOption(0, "¿ªÊ¼");
 }
 
 void Controller::run(const int option, const void* w) {
