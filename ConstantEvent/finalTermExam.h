@@ -18,7 +18,7 @@ public:
 	FinalTermExam(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
-
+	double getWeight(const Character* character) const;
 };
 
 FinalTermExam::FinalTermExam(const std::string& text) {
@@ -32,6 +32,11 @@ attr FinalTermExam::getDelta(const Character* character, const int option) const
 	if (option == 0) result = finalTermExamNormallyAttend(character);
 	else assert(false);
 	return result;
+}
+
+double FinalTermExam::getWeight(const Character* character) const {
+	if ((character->getSingleAttribute(AttributeEnum::day) - 125) % 126) return 0;
+	return weight * 10000;
 }
 
 attr FinalTermExam::finalTermExamNormallyAttend(const Character* character) const {

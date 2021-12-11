@@ -18,6 +18,7 @@ public:
 
 	attr getDelta(const Character* character, const int option) const;
 
+	double getWeight(const Character* character) const;
 
 };
 
@@ -37,13 +38,20 @@ attr VoteStudentAssociation::getDelta(const Character* character, const int opti
 	return result;
 }
 
-attr VoteStudentAssociation::voteStudentAssociationJoin(const Character*) const {
+double VoteStudentAssociation::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::voteCoolDown)) return 0;
+	return weight * 0.03;
+}
+
+attr VoteStudentAssociation::voteStudentAssociationJoin(const Character* character) const {
 	attr delta;
-	delta[AttributeEnum::study_rate] = 100;
+	delta[AttributeEnum::study_rate] = 100 - character->getSingleAttribute(AttributeEnum::study_rate);
+	delta[AttributeEnum::voteCoolDown] = 2;
 	return delta;
 }
 
 attr VoteStudentAssociation::voteStudentAssociationNotJoin(const Character*) const {
 	attr delta;
+	delta[AttributeEnum::voteCoolDown] = 2;
 	return delta;
 }

@@ -8,12 +8,14 @@ Character::Character() {
     attribute[AttributeEnum::top_of_physical_quality] = 100;
     attribute[AttributeEnum::study_rate] = 100;
     attribute[AttributeEnum::top_of_study_rate] = 100;
-    attribute[AttributeEnum::term] = 1;
+    attribute[AttributeEnum::term] = 0;
     attribute[AttributeEnum::affair0] = -1;
     attribute[AttributeEnum::affair1] = -1;
     attribute[AttributeEnum::affair2] = -1;
     attribute[AttributeEnum::affair3] = -1;
     attribute[AttributeEnum::affair4] = -1;
+    attribute[AttributeEnum::day] = 0;
+    attribute[AttributeEnum::bottom_of_pressure] = 100;
 }
 Character::Character(attr a) {
     attribute = a;
@@ -34,6 +36,8 @@ ATTR_TYPE Character::getSingleAttribute(AttributeEnum name) const {
 
 Character* Character::update(const attr& delta) {
     attribute += delta;
+    if (getSingleAttribute(AttributeEnum::is_of_love)) updateSingle(AttributeEnum::time_love, 1, true);
+    if (!attribute[AttributeEnum::is_of_love] && attribute[AttributeEnum::goodByeDay]) updateSingle(AttributeEnum::goodByeDay, -1, true);
     return this;
 }
 

@@ -17,6 +17,7 @@ public:
 	SayGoodBye(const std::string& text);
 
 	attr getDelta(const Character* character, const int optino) const;
+	double getWeight(const Character* character) const;
 
 };
 
@@ -34,8 +35,17 @@ attr SayGoodBye::getDelta(const Character* character, const int option) const {
 	return result;
 }
 
+double SayGoodBye::getWeight(const Character* character) const {
+	if (!character->getSingleAttribute(AttributeEnum::is_of_love)) return 0;
+	if (character->getSingleAttribute(AttributeEnum::pressure) <= 70) return 0;
+	double weight = 0.1 * this->weight;
+	return weight;
+}
+
 attr SayGoodBye::sayGoodByeContinue(const Character* character) const {
 	attr delta;
+	delta[AttributeEnum::is_of_love] = -1;
 	delta[AttributeEnum::top_of_study_rate] = 70 - character->getSingleAttribute(AttributeEnum::top_of_study_rate);
+	delta[AttributeEnum::goodByeDay] = 10;
 	return delta;
 }

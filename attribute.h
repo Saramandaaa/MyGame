@@ -35,6 +35,11 @@ enum class AttributeEnum
     number_prp = 21,
     number_novation = 22,
     failedCourseAmt = 23,
+    prp_term_remain = 24,
+    innovate_term_remain = 25,
+    day = 26,
+    goodByeDay = 27,
+    voteCoolDown = 28,
     attribute_end
 };
 /*
@@ -56,7 +61,14 @@ enum class AttributeEnum
     int    number_love=0;                 //恋爱次数（非可见）
     int    time_love=0;                   //恋爱天数（可见）
     int    number_prp=0;                  //prp_task次数（可见）
-    int    number_novation=0;             //novation_taks次数（可见）*/
+    int    number_novation=0;             //novation_taks次数（可见）
+    int    failedCourseAmt=0;             //挂科次数（可见）
+    int    prp_term_remain=0;             //prp剩余学期（可见）
+    int    innovate_term_remain=0;        //innovate剩余学期（可见）
+    int    day=1;                         //当前天数
+    int    goodBydDay=0;                  //失恋缓冲天数
+    int    voteCoolDown=0;                //vote事件冷却时间
+    */
 
 
 class Attribute

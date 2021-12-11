@@ -21,6 +21,7 @@ public:
 
 	attr getDelta(const Character* character, const int option) const;
 
+	double getWeight(const Character* character) const;
 
 };
 
@@ -40,10 +41,18 @@ attr Prp::getDelta(const Character* character, const int option) const {
 	return result;
 }
 
+double Prp::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::is_of_prp)) return 0;
+	if (character->getSingleAttribute(AttributeEnum::term) == 1) return 0;
+	if (character->getSingleAttribute(AttributeEnum::all_knowledge) < 80 * character->getSingleAttribute(AttributeEnum::term) - 80) return 0;
+	return weight;
+}
+
 attr Prp::prpJoin(const Character*) const {
 	attr delta;
     delta[AttributeEnum::bottom_of_pressure] = 20;
 	delta[AttributeEnum::is_of_prp] = 1;
+	delta[AttributeEnum::prp_term_remain] = 2;
 	return delta;
 }
 

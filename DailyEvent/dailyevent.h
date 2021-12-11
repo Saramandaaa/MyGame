@@ -11,6 +11,7 @@ public:
     //c为角色，o为选择的选项，从0开始编号
     //对于日常事件，0学习，1运动，2娱乐，3prp，4大创
     attr getDelta(const Character* c, const int o) const;
+    double getWeight(const Character* character) const;
 
     //创建实体时可能需要添加相应选项
     void addPrp();
@@ -31,6 +32,7 @@ private:
 DailyEvent::DailyEvent(const std::string t) {
     type = EventEnum::BasicDailyEvent;
     changeText(t);
+    changeWeight(10);
     optionSet.insertOption(0, "学习");
     optionSet.insertOption(1, "运动");
     optionSet.insertOption(2, "娱乐");
@@ -55,6 +57,22 @@ attr DailyEvent::getDelta(const Character* c, const int o) const {
     else assert(false);
     //修改最近的事件
     return change_affairs(c, o, result);
+}
+
+double DailyEvent::getWeight(const Character* character) const {
+    switch (type) {
+    case EventEnum::BasicDailyEvent:
+        if (character->getSingleAttribute(AttributeEnum::is_of_prp)) return 0;
+        if (character->getSingleAttribute(AttributeEnum::is_of_novation)) return 0;
+        break;
+    case EventEnum::PrpDailyEvent:
+        if (!character->getSingleAttribute(AttributeEnum::is_of_prp)) return 0;
+        break;
+    case EventEnum::InnovateProgramDailyEvent:
+        if (!character->getSingleAttribute(AttributeEnum::is_of_novation)) return 0;
+        break;
+    }
+    return weight * 0.01;
 }
 
 attr DailyEvent::change_affairs(const Character* c, const int o, attr delta) const {

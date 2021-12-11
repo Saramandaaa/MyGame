@@ -20,6 +20,7 @@ public:
 	InnovateProgram(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
+	double getWeight(const Character* character) const;
 	
 };
 
@@ -38,10 +39,18 @@ attr InnovateProgram::getDelta(const Character* character, const int option) con
 	return result;
 }
 
+double InnovateProgram::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::is_of_novation)) return 0;
+	if (character->getSingleAttribute(AttributeEnum::term) == 1) return 0;
+	if (character->getSingleAttribute(AttributeEnum::all_knowledge) < 85 * character->getSingleAttribute(AttributeEnum::term) - 85) return 0;
+	return weight;
+}
+
 attr InnovateProgram::innovateProgramJoin(const Character*) const {
 	attr delta;
 	delta[AttributeEnum::is_of_novation] = 1;
     delta[AttributeEnum::bottom_of_pressure] = 30;
+	delta[AttributeEnum::innovate_term_remain] = 3;
 	return delta;
 }
 

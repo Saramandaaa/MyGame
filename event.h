@@ -8,6 +8,10 @@
 #include "character.h"
 #include "optionset.h"
 
+// 表示所有事件的个数
+#define EVENT_AMT (int)EventEnum::Event_End
+
+// 所有事件的枚举，更新时必须手动同步更新 EVENT_AMT
 enum class EventEnum
 {
     BasicDailyEvent = 0,
@@ -17,36 +21,49 @@ enum class EventEnum
     MidTermExam = 3,
     finalTermExam = 4,
     entranceExam = 5,
+    newTerm = 6,
 
-    Prp = 6,
-    InnovateProgram = 7,
-    JoinCorporation = 8,
-    VoteStudentAssociation = 9,
+    Prp = 7,
+    InnovateProgram = 8,
+    JoinCorporation = 9,
+    VoteStudentAssociation = 10,
 
-    Love = 10,
-    sayGoodBye = 11,
+    Love = 11,
+    sayGoodBye = 12,
 
-    physicalDisease = 12,
-    mentalDisease = 13,
+    physicalDisease = 13,
+    mentalDisease = 14,
 
-    Withdraw = 14,
-    Baoyan = 15,
-    Work = 16
+    Withdraw = 15,
+    Baoyan = 16,
+    Work = 17,
+
+    PrpFinish = 18,
+    InnovateFinish = 19,
+
+    TotallyGoodBye = 20,
+
+    Event_End
 };
 
+std::string getEventName(int type);
 
 class Event {
 public:
     virtual attr getDelta(const Character*, const int) const;
+    virtual double getWeight(const Character* character) const;
     std::string getText(void) const;
     void changeText(const std::string&);
+    void changeWeight(const double);
     virtual ~Event();
-    Event() {};
-    Event(const std::string& t) : text(t) {};
+    Event() : weight(1) {};
+    Event(const std::string& t) : text(t), weight(1) {};
     OptionSet optionSet;
     EventEnum type;
 private:
     std::string text;
+protected:
+    double weight;
 };
 
 class TestEvent : public Event {

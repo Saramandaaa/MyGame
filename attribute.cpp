@@ -9,10 +9,11 @@ Attribute::Attribute() {
     for (int i = 0; i < ATTR_AMT; i++) {
 		attributes[i] = 0;
 	}
+    (*this)[AttributeEnum::day] = 1;
 }
 
 Attribute::~Attribute() {
-
+   
 }
 
 int& Attribute::operator[](int num) {

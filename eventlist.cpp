@@ -11,7 +11,32 @@ void EventList::load(SaveInfo info) {
 
 Event* EventList::getNewEvent(const Character* c) {
     //main function here
-    return getDailyEvent(c);
+    double* weights = new double[EVENT_AMT];
+    double total = getAllWeights(c, weights);
+    double random = rs.step() * total;
+
+    int eventType = 0;
+
+    for (; eventType < EVENT_AMT && random >= weights[eventType]; eventType++) {
+        random -= weights[eventType];
+    }
+
+    Event* result = getEvent((EventEnum)eventType);
+
+
+    delete[] weights;
+    return result;
+}
+
+double EventList::getAllWeights(const Character* character, double* weights) {
+    Event* temp;
+    double total = 0;
+    for (int i = 0; i < EVENT_AMT; i++) {
+        temp = getEvent((EventEnum)i);
+        weights[i] = temp->getWeight(character);
+        total += weights[i];
+    }
+    return total;
 }
 
 Event* EventList::getDailyEvent(const Character *c) {
@@ -78,6 +103,10 @@ Event* EventList::getEvent(EventEnum type) {
             event = new EntranceExam("");
         break;
 
+        case EventEnum::newTerm:
+            event = new NewTerm("");
+        break;
+
         case EventEnum::Prp:
             event = new Prp("");
         break;
@@ -121,6 +150,17 @@ Event* EventList::getEvent(EventEnum type) {
         case EventEnum::Work:
             event = new Work("");
         break;
+        case EventEnum::InnovateFinish:
+            event = new InnovateFinish("");
+        break;
+        case EventEnum::PrpFinish:
+            event = new PrpFinish("");
+        break;
+        case EventEnum::TotallyGoodBye:
+            event = new TotallyGoodBye("");
+        break;
+        default:
+            event = nullptr;
     }
     return (Event*)event;
 }

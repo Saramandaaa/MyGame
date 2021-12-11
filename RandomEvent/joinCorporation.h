@@ -17,12 +17,12 @@ public:
 	JoinCorporation(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
+	double getWeight(const Character* character) const;
 };
 
 JoinCorporation::JoinCorporation(const std::string& text) {
     type = EventEnum::JoinCorporation;
 	changeText(text);
-
 	optionSet.insertOption(0, "加入");
 	optionSet.insertOption(1, "不加入");
 }
@@ -34,6 +34,13 @@ attr JoinCorporation::getDelta(const Character* character, const int option) con
 	else assert(false);
 	return result;
 }
+
+double JoinCorporation::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::day) != 63) return 0;
+	double weight = (0.5 + character->getSingleAttribute(AttributeEnum::social) * 0.00e1) * this->weight;
+	return weight;
+}
+
 attr JoinCorporation::joinCorporationJoin(const Character*) const {
 	attr delta;
 	delta[AttributeEnum::study_rate] = 100;

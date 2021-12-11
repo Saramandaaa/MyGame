@@ -14,6 +14,7 @@ public:
 	MidTermExam(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
+	double getWeight(const Character* character) const;
 };
 
 MidTermExam::MidTermExam(const std::string& text) {
@@ -27,6 +28,11 @@ attr MidTermExam::getDelta(const Character* character, const int option) const {
 	if (option == 0) result = midTermExamNormallyAttend(character);
 	else assert(false);
 	return result;
+}
+
+double MidTermExam::getWeight(const Character* character) const {
+	if ((character->getSingleAttribute(AttributeEnum::day) - 62) % 126) return 0;
+	return weight * 10000;
 }
 
 attr MidTermExam::midTermExamNormallyAttend(const Character* character) const {

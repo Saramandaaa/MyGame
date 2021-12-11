@@ -18,7 +18,7 @@ public:
 	Love(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
-
+	double getWeight(const Character* character) const;
 };
 
 Love::Love(const std::string& text) {
@@ -37,9 +37,19 @@ attr Love::getDelta(const Character* character, const int option) const {
 	return result;
 }
 
+double Love::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::is_of_love)) return 0;
+	if (character->getSingleAttribute(AttributeEnum::number_love) >= 2) return 0;
+	double weight = (0.01 + character->getSingleAttribute(AttributeEnum::social) * 0.00005) * this->weight;
+	return weight * 1000;
+}
+
 attr Love::loveAccept(const Character* character) const {
 	attr delta;
 	delta[AttributeEnum::top_of_study_rate] = 130 - character->getSingleAttribute(AttributeEnum::top_of_study_rate);
+	delta[AttributeEnum::is_of_love] = 1;
+	delta[AttributeEnum::number_love] = 1;
+	if (character->getSingleAttribute(AttributeEnum::goodByeDay)) delta[AttributeEnum::goodByeDay] = -character->getSingleAttribute(AttributeEnum::goodByeDay);
 	return delta;
 }
 

@@ -13,6 +13,8 @@ public:
 	EntranceExam(const std::string& text);
 
     attr getDelta(const Character* character, const int option) const;
+
+	double getWeight(const Character* character) const;
 };
 
 EntranceExam::EntranceExam(const std::string& text) {
@@ -26,6 +28,11 @@ attr EntranceExam::getDelta(const Character* character, const int option) const 
 	if (option == 0) result = entranceExamNormallyAttend(character);
 	else assert(false);
 	return result;
+}
+
+double EntranceExam::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::day) != 1) return 0;
+	return weight * 10000;
 }
 
 attr EntranceExam::entranceExamNormallyAttend(const Character*) const {

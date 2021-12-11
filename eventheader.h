@@ -6,6 +6,10 @@
 #include "ConstantEvent/entranceExam.h"
 #include "ConstantEvent/finalTermExam.h"
 #include "ConstantEvent/midTermExam.h"
+#include "ConstantEvent/newTerm.h"
+#include "ConstantEvent/prpFinish.h"
+#include "ConstantEvent/innovateFinish.h"
+#include "ConstantEvent/totallyGoodBye.h"
 
 #include "FinalEvent/baoyan.h"
 #include "FinalEvent/withdraw.h"

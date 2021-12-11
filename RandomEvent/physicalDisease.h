@@ -16,6 +16,7 @@ public:
 	PhysicalDisease(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
+	double getWeight(const Character* character) const;
 
 };
 
@@ -31,6 +32,16 @@ attr PhysicalDisease::getDelta(const Character* character, const int option) con
 	if (option == 0) result = physicalDiseaseContinue(character);
 	else assert(false);
 	return result;
+}
+
+double PhysicalDisease::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::physical_quality)
+		>= character->getSingleAttribute(AttributeEnum::top_of_physical_quality) * 0.2) return 0;
+	double weight = (101
+		- (double)character->getSingleAttribute(AttributeEnum::top_of_physical_quality)
+		- 100 * (double)character->getSingleAttribute(AttributeEnum::physical_quality) / character->getSingleAttribute(AttributeEnum::top_of_physical_quality))
+		* this->weight;
+	return weight;
 }
 
 attr PhysicalDisease::physicalDiseaseContinue(const Character*) const {
