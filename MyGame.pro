@@ -16,55 +16,55 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    attribute.cpp \
-    character.cpp \
-    controller.cpp \
-    event.cpp \
-    eventHeap.cpp \
-    eventlist.cpp \
-    loadsave.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    optionset.cpp \
-    randsummoner.cpp \
-    saveinfo.cpp \
-    startmenu.cpp \
-    textcode.cpp
+    Sources/attribute.cpp \
+    Sources/character.cpp \
+    Sources/controller.cpp \
+    Sources/event.cpp \
+    Sources/eventHeap.cpp \
+    Sources/eventlist.cpp \
+    Sources/main.cpp \
+    Sources/optionset.cpp \
+    Sources/saveinfo.cpp \
+    Sources/GUI/mainwindow.cpp \
+    Sources/GUI/startmenu.cpp \
+    Sources/GUI/loadsave.cpp \
+    Sources/utility/textcode.cpp \
+    Sources/utility/randsummoner.cpp
 
 HEADERS += \
-    ConstantEvent/entranceExam.h \
-    ConstantEvent/finalTermExam.h \
-    ConstantEvent/innovateFinish.h \
-    ConstantEvent/midTermExam.h \
-    ConstantEvent/newTerm.h \
-    ConstantEvent/prpFinish.h \
-    ConstantEvent/totallyGoodBye.h \
-    DailyEvent/dailyevent.h \
-    FinalEvent/baoyan.h \
-    FinalEvent/withdraw.h \
-    FinalEvent/work.h \
-    RandomEvent/innovateProgram.h \
-    RandomEvent/joinCorporation.h \
-    RandomEvent/love.h \
-    RandomEvent/mentalDisease.h \
-    RandomEvent/physicalDisease.h \
-    RandomEvent/prp.h \
-    RandomEvent/sayGoodBye.h \
-    RandomEvent/voteStudentAssociation.h \
-    attribute.h \
-    character.h \
-    controller.h \
-    event.h \
-    eventHeap.h \
-    eventheader.h \
-    eventlist.h \
-    loadsave.h \
-    mainwindow.h \
-    optionset.h \
-    randsummoner.h \
-    saveinfo.h \
-    startmenu.h \
-    textcode.h
+    Events/ConstantEvent/entranceExam.hpp \
+    Events/ConstantEvent/finalTermExam.hpp \
+    Events/ConstantEvent/innovateFinish.hpp \
+    Events/ConstantEvent/midTermExam.hpp \
+    Events/ConstantEvent/newTerm.hpp \
+    Events/ConstantEvent/prpFinish.hpp \
+    Events/ConstantEvent/totallyGoodBye.hpp \
+    Events/DailyEvent/dailyevent.hpp \
+    Events/FinalEvent/baoyan.hpp \
+    Events/FinalEvent/withdraw.hpp \
+    Events/FinalEvent/work.hpp \
+    Events/RandomEvent/innovateProgram.hpp \
+    Events/RandomEvent/joinCorporation.hpp \
+    Events/RandomEvent/love.hpp \
+    Events/RandomEvent/mentalDisease.hpp \
+    Events/RandomEvent/physicalDisease.hpp \
+    Events/RandomEvent/prp.hpp \
+    Events/RandomEvent/sayGoodBye.hpp \
+    Events/RandomEvent/voteStudentAssociation.hpp \
+    Headers/attribute.h \
+    Headers/character.h \
+    Headers/controller.h \
+    Headers/event.h \
+    Headers/eventHeap.h \
+    Headers/eventheader.h \
+    Headers/eventlist.h \
+    Headers/optionset.h \
+    Headers/saveinfo.h \
+    Headers/GUI/mainwindow.h \
+    Headers/GUI/startmenu.h \
+    Headers/GUI/loadsave.h \
+    Headers/utility/textcode.h \
+    Headers/utility/randsummoner.h
 
 FORMS += \
     Forms/loadsave.ui \
