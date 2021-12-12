@@ -50,7 +50,7 @@ double InnovateProgram::getWeight(const Character* character) const {
 	if (character->getSingleAttribute(AttributeEnum::is_of_novation)) return 0;
     if (character->getSingleAttribute(AttributeEnum::term) == 1 || character->getSingleAttribute(AttributeEnum::term) > 5) return 0;
 	if (character->getSingleAttribute(AttributeEnum::all_knowledge) < 85 * character->getSingleAttribute(AttributeEnum::term) - 85) return 0;
-	return weight;
+    return weight;
 }
 
 attr InnovateProgram::innovateProgramJoin(const Character*) const {

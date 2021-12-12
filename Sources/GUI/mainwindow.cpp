@@ -177,8 +177,8 @@ bool MainWindow::loadCurrentEvent() {
     }
     //qDebug() << "Changing buttons' status...";
 
-    if (event->type == EventEnum::InnovateProgramDailyEvent) {
-        optionNum = event->optionSet.size();
+    optionNum = event->optionSet.size();
+    if (event->type == EventEnum::InnovateProgramDailyEvent && optionNum == 4) {
         for (int i = 0; i < 3; i++) {
             buttons[i]->setText(codec->toUnicode(event->optionSet.findOption(i)->second.c_str()));
             buttons[i]->setDisabled(false);
@@ -187,9 +187,10 @@ bool MainWindow::loadCurrentEvent() {
         buttons[3]->setDisabled(true);
         buttons[4]->setText(codec->toUnicode(event->optionSet.findOption(4)->second.c_str()));
         buttons[4]->setDisabled(false);
+
+        //qDebug() << "Done.";
         return true;
     }
-    optionNum = event->optionSet.size();
     for (int i = 0; i < optionNum; i++) {
         buttons[i]->setText(codec->toUnicode(event->optionSet.findOption(i)->second.c_str()));
         buttons[i]->setDisabled(false);
