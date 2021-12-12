@@ -13,13 +13,13 @@ public:
 	Baoyan();
 	Baoyan(const std::string& text);
 
-	attr getDelta(const Character* character, const int option) const;
+    attr getDelta(const Character* character, const int option, std::string&) const;
 	double getWeight(const Character* character) const;
 
 };
 
 Baoyan::Baoyan() :
-	Baoyan("保研人上人")
+    Baoyan("恭喜你，成功保研")
 {
 
 }
@@ -31,7 +31,7 @@ Baoyan::Baoyan(const std::string& text) {
 	optionSet.insertOption(0, "继续");
 }
 
-attr Baoyan::getDelta(const Character* character, const int option) const {
+attr Baoyan::getDelta(const Character* character, const int option, std::string&) const {
 	attr result;
 	if (option == 0) result = baoyanContinue(character);
 	else assert(false);

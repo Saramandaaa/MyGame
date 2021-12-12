@@ -20,6 +20,7 @@ SOURCES += \
     character.cpp \
     controller.cpp \
     event.cpp \
+    eventHeap.cpp \
     eventlist.cpp \
     loadsave.cpp \
     main.cpp \
@@ -33,7 +34,11 @@ SOURCES += \
 HEADERS += \
     ConstantEvent/entranceExam.h \
     ConstantEvent/finalTermExam.h \
+    ConstantEvent/innovateFinish.h \
     ConstantEvent/midTermExam.h \
+    ConstantEvent/newTerm.h \
+    ConstantEvent/prpFinish.h \
+    ConstantEvent/totallyGoodBye.h \
     DailyEvent/dailyevent.h \
     FinalEvent/baoyan.h \
     FinalEvent/withdraw.h \
@@ -50,6 +55,7 @@ HEADERS += \
     character.h \
     controller.h \
     event.h \
+    eventHeap.h \
     eventheader.h \
     eventlist.h \
     loadsave.h \
@@ -61,9 +67,9 @@ HEADERS += \
     textcode.h
 
 FORMS += \
-    loadsave.ui \
-    mainwindow.ui \
-    startmenu.ui
+    Forms/loadsave.ui \
+    Forms/mainwindow.ui \
+    Forms/startmenu.ui
 
 TRANSLATIONS += \
     MyGame_zh_CN.ts

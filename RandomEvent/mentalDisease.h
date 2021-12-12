@@ -16,13 +16,13 @@ public:
 	MentalDisease();
 	MentalDisease(const std::string& text);
 
-	attr getDelta(const Character* character, const int option) const;
+    attr getDelta(const Character* character, const int option, std::string&) const;
 
 	double getWeight(const Character* character) const;
 };
 
 MentalDisease::MentalDisease() :
-	MentalDisease("玉玉症")
+    MentalDisease("压力过大，出现了心理疾病，压力下限增加，学习效率下降")
 {
 
 }
@@ -34,7 +34,7 @@ MentalDisease::MentalDisease(const std::string& text) {
 	optionSet.insertOption(0, "继续");
 }
 
-attr MentalDisease::getDelta(const Character* character, const int option) const {
+attr MentalDisease::getDelta(const Character* character, const int option, std::string&) const {
 	attr result;
 	if (option == 0) result = mentalDiseaseContinue(character);
 	else assert(false);
@@ -46,7 +46,7 @@ double MentalDisease::getWeight(const Character* character) const {
 	if (character->getSingleAttribute(AttributeEnum::pressure)
 		<= character->getSingleAttribute(AttributeEnum::bottom_of_pressure) * 0.2 + 80) return 0;
 	double weight = character->getSingleAttribute(AttributeEnum::pressure) * 0.01 * this->weight;
-	return weight;
+    return weight * 0.5;
 }
 
 attr MentalDisease::mentalDiseaseContinue(const Character*) const {
@@ -54,5 +54,6 @@ attr MentalDisease::mentalDiseaseContinue(const Character*) const {
 	delta[AttributeEnum::randomEventCoolDown] = 1;
     delta[AttributeEnum::bottom_of_pressure] = 10;
     delta[AttributeEnum::pressure] = 10;
+    delta[AttributeEnum::is_mental_ill] = 1;
 	return delta;
 }

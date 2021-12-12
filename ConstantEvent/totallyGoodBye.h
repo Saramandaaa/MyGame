@@ -12,12 +12,12 @@ public:
 	TotallyGoodBye();
 	TotallyGoodBye(const std::string& text);
 
-	attr getDelta(const Character* character, const int option) const;
+    attr getDelta(const Character* character, const int option, std::string&) const;
 	double getWeight(const Character* character) const;
 };
 
 TotallyGoodBye::TotallyGoodBye() :
-	TotallyGoodBye("彻底与过去告别")
+    TotallyGoodBye("彻底与过去告别，不再对之前的恋人怀有留念")
 {
 
 }
@@ -29,7 +29,7 @@ TotallyGoodBye::TotallyGoodBye(const std::string& text) {
 	optionSet.insertOption(0, "继续");
 }
 
-attr TotallyGoodBye::getDelta(const Character* character, const int option) const {
+attr TotallyGoodBye::getDelta(const Character* character, const int option, std::string&) const {
 	attr result;
 	if (option == 0) result = totallyGoodByeContinue(character);
 	else assert(false);

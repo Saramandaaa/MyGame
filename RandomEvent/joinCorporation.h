@@ -17,12 +17,12 @@ public:
 	JoinCorporation();
 	JoinCorporation(const std::string& text);
 
-	attr getDelta(const Character* character, const int option) const;
+    attr getDelta(const Character* character, const int option, std::string&) const;
 	double getWeight(const Character* character) const;
 };
 
 JoinCorporation::JoinCorporation() :
-	JoinCorporation("加入社团")
+    JoinCorporation("是否加入社团活动？加入之后，日常事件中娱乐活动的影响将增加")
 {
 
 }
@@ -34,7 +34,7 @@ JoinCorporation::JoinCorporation(const std::string& text) {
 	optionSet.insertOption(1, "不加入");
 }
 
-attr JoinCorporation::getDelta(const Character* character, const int option) const {
+attr JoinCorporation::getDelta(const Character* character, const int option, std::string&) const {
 	attr result;
 	if (option == 0) result = joinCorporationJoin(character);
 	else if (option == 1) result = joinCorporationNotJoin(character);
@@ -44,15 +44,16 @@ attr JoinCorporation::getDelta(const Character* character, const int option) con
 
 double JoinCorporation::getWeight(const Character* character) const {
 	if (character->getSingleAttribute(AttributeEnum::randomEventCoolDown)) return 0;
-	if (character->getSingleAttribute(AttributeEnum::day) != 63) return 0;
-	double weight = (0.5 + character->getSingleAttribute(AttributeEnum::social) * 0.00e1) * this->weight;
-	return weight;
+    if (character->getSingleAttribute(AttributeEnum::day) % 20 != 11) return 0;
+    //double weight = (0.5 + character->getSingleAttribute(AttributeEnum::social) * 0.001) * this->weight;
+    //return weight;
+    return -1;
 }
 
 attr JoinCorporation::joinCorporationJoin(const Character*) const {
 	attr delta;
 	delta[AttributeEnum::randomEventCoolDown] = 1;
-	delta[AttributeEnum::study_rate] = 100;
+    delta[AttributeEnum::study_rate] = 100;
 	return delta;
 }
 attr JoinCorporation::joinCorporationNotJoin(const Character*) const {

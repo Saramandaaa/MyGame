@@ -20,13 +20,13 @@ public:
 	InnovateProgram();
 	InnovateProgram(const std::string& text);
 
-	attr getDelta(const Character* character, const int option) const;
+    attr getDelta(const Character* character, const int option, std::string&) const;
 	double getWeight(const Character* character) const;
 	
 };
 
 InnovateProgram::InnovateProgram() :
-	InnovateProgram("加入大创")
+    InnovateProgram("是否加入大创项目？加入后，需要在3个学期内进行至少9次大创活动以通过答辩。完成后将获得科研和知识奖励。")
 {
 
 }
@@ -38,7 +38,7 @@ InnovateProgram::InnovateProgram(const std::string& text) {
 	optionSet.insertOption(1, "不参加");
 }
 
-attr InnovateProgram::getDelta(const Character* character, const int option) const {
+attr InnovateProgram::getDelta(const Character* character, const int option, std::string&) const {
 	attr result;
 	if (option == 0) result = innovateProgramJoin(character);
 	else if (option == 1) result = innovateProgramNotJoin(character);
@@ -48,8 +48,9 @@ attr InnovateProgram::getDelta(const Character* character, const int option) con
 
 double InnovateProgram::getWeight(const Character* character) const {
 	if (character->getSingleAttribute(AttributeEnum::randomEventCoolDown)) return 0;
+    if (character->getSingleAttribute(AttributeEnum::is_of_prp)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::is_of_novation)) return 0;
-	if (character->getSingleAttribute(AttributeEnum::term) == 1) return 0;
+    if (character->getSingleAttribute(AttributeEnum::term) == 1 || character->getSingleAttribute(AttributeEnum::term) > 5) return 0;
 	if (character->getSingleAttribute(AttributeEnum::all_knowledge) < 85 * character->getSingleAttribute(AttributeEnum::term) - 85) return 0;
 	return weight;
 }

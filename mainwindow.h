@@ -33,26 +33,22 @@ public:
     ~MainWindow();
     void flush(); //更新事件显示
     void setText(const std::string& text); //设置事件描述
+    bool isGameEnd();
     std::string getText();
 
     void emitButtonClicked0() {
-        setText("选择了选项:");
         emit buttonClicked(0, this);
     }
     void emitButtonClicked1() {
-        setText("选择了选项:");
         emit buttonClicked(1, this);
     }
     void emitButtonClicked2() {
-        setText("选择了选项:");
         emit buttonClicked(2, this);
     }
     void emitButtonClicked3() {
-        setText("选择了选项:");
         emit buttonClicked(3, this);
     }
     void emitButtonClicked4() {
-        setText("选择了选项:");
         emit buttonClicked(4, this);
     }
     void closeEvent(QCloseEvent *event);
@@ -67,6 +63,7 @@ private:
     int optionNum;
     QVBoxLayout *buttonsLayout;
     QTableWidget *table;
+    bool gameEndFlag;
 
     void initFromSaveInfo(SaveInfo);
     void initAttrTable();
@@ -77,6 +74,7 @@ private:
     bool loadCurrentEvent(); //读取当前事件
     void setTable(int, int, std::string);
     void flushTable();
+    void gameEnd(EventEnum);
 
 };
 #endif // MAINWINDOW_H

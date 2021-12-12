@@ -13,7 +13,7 @@ public:
 	EntranceExam();
 	EntranceExam(const std::string& text);
 
-    attr getDelta(const Character* character, const int option) const;
+    attr getDelta(const Character* character, const int option, std::string&) const;
 
 	double getWeight(const Character* character) const;
 };
@@ -31,7 +31,7 @@ EntranceExam::EntranceExam(const std::string& text) {
 	optionSet.insertOption(0, "¼ÌÐø");
 }
 
-attr EntranceExam::getDelta(const Character* character, const int option) const {
+attr EntranceExam::getDelta(const Character* character, const int option, std::string&) const {
 	attr result;
 	if (option == 0) result = entranceExamNormallyAttend(character);
 	else assert(false);

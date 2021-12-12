@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     optionNum = 0;
+    gameEndFlag = false;
     buttonsLayout = nullptr;
     initButtons();
     initController();
@@ -28,6 +29,7 @@ MainWindow::MainWindow(SaveInfo info, QWidget *parent)
 {
     ui->setupUi(this);
     optionNum = 0;
+    gameEndFlag = false;
     buttonsLayout = nullptr;
     initButtons();
     initController();
@@ -44,6 +46,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::initMenuBar() {
 
+}
+
+void MainWindow::gameEnd(EventEnum) {
+    setText("游戏结束...");
+    gameEndFlag = true;
+    buttons[0]->setText(codec->toUnicode("保存结果"));
+    for (int i = 1; i < MAX_OPTION_NUM; i++) {
+        buttons[i]->setText("");
+        buttons[i]->setDisabled(true);
+    }
+    QObject::connect(buttons[0], &QPushButton::clicked, this, &MainWindow::on_actionsave_triggered);
 }
 
 void MainWindow::initController() {
@@ -67,6 +80,7 @@ void MainWindow::initFromSaveInfo(SaveInfo info) {
 }
 
 void MainWindow::flush() {
+    if (gameEndFlag) return;
     if (!loadCurrentEvent()) {
         qDebug() << "loadCurrentEvent Error!";
         return;
@@ -91,7 +105,8 @@ void MainWindow::initAttrTable() {
     table = ui->attributes;
     int n = 9, m = 2;
     table->setColumnCount(m);
-    table->setColumnWidth(0, table->width() / 3 * 2);
+    table->setColumnWidth(0, table->width() / 3.0 * 2.0);
+    table->setColumnWidth(1, table->width() - table->width() / 3.0 * 2.0);
     table->setRowCount(n);
     for (int i = 0; i < n; i++)
         table->setRowHeight(i, table->height() / n);
@@ -155,7 +170,24 @@ bool MainWindow::loadCurrentEvent() {
 
     Event* event = controller->getCurrentEvent();
 
+    if (event->type == EventEnum::Baoyan || event->type == EventEnum::Work || event->type == EventEnum::Withdraw) {
+        gameEnd(event->type);
+        return true;
+    }
     //qDebug() << "Changing buttons' status...";
+
+    if (event->type == EventEnum::InnovateProgramDailyEvent) {
+        optionNum = event->optionSet.size();
+        for (int i = 0; i < 3; i++) {
+            buttons[i]->setText(codec->toUnicode(event->optionSet.findOption(i)->second.c_str()));
+            buttons[i]->setDisabled(false);
+        }
+        buttons[3]->setText("");
+        buttons[3]->setDisabled(true);
+        buttons[4]->setText(codec->toUnicode(event->optionSet.findOption(4)->second.c_str()));
+        buttons[4]->setDisabled(false);
+        return true;
+    }
     optionNum = event->optionSet.size();
     for (int i = 0; i < optionNum; i++) {
         buttons[i]->setText(codec->toUnicode(event->optionSet.findOption(i)->second.c_str()));
@@ -168,6 +200,10 @@ bool MainWindow::loadCurrentEvent() {
 
     //qDebug() << "Done.";
     return true;
+}
+
+bool MainWindow::isGameEnd() {
+    return gameEndFlag;
 }
 
 void MainWindow::closeEvent(QCloseEvent*) {

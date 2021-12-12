@@ -50,14 +50,14 @@ std::string getEventName(int type);
 
 class Event {
 public:
-    virtual attr getDelta(const Character*, const int) const;
+    virtual attr getDelta(const Character*, const int, std::string&) const;
     virtual double getWeight(const Character* character) const;
     std::string getText(void) const;
     void changeText(const std::string&);
     void changeWeight(const double);
     virtual ~Event();
-    Event() : weight(1), priority(0) {};
-    Event(const std::string& t) : text(t), weight(1), priority(0) {};
+    Event() : priority(0), weight(1) {};
+    Event(const std::string& t) : priority(0), text(t), weight(1) {};
     OptionSet optionSet;
     EventEnum type;
     int priority;

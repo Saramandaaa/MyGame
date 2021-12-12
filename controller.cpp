@@ -18,9 +18,16 @@ void Controller::init() {
 }
 
 void Controller::run(const int option, const void* w) {
-    if (!isReady()) return;
-    ((MainWindow*)w)->setText(currentEvent->optionSet.findOption(option)->second + "\n\n");
-    attr delta = this->currentEvent->getDelta(this->mainCharacter, option);
+    if (!isReady() || ((MainWindow*)w)->isGameEnd()) return;
+    ((MainWindow*)w)->setText("Ñ¡ÔñÁË:");
+    ((MainWindow*)w)->setText(currentEvent->optionSet.findOption(option)->second + "\n");
+    std::string message;
+    attr delta = this->currentEvent->getDelta(this->mainCharacter, option, message);
+    qDebug() << message.c_str();
+    if ((int)message.size() > 0) {
+        ((MainWindow*)w)->setText(message + "\n");
+    }
+    ((MainWindow*)w)->setText("\n");
 
     mainCharacter = mainCharacter->update(delta);
 

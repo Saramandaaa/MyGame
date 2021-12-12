@@ -12,12 +12,12 @@ public:
 	NewTerm();
 	NewTerm(const std::string& text);
 
-	attr getDelta(const Character* character, int option) const;
+    attr getDelta(const Character* character, int option, std::string&) const;
 	double getWeight(const Character* character) const;
 };
 
 NewTerm::NewTerm() :
-	NewTerm("新学期")
+    NewTerm("新的学期开始了")
 {
 
 }
@@ -29,7 +29,7 @@ NewTerm::NewTerm(const std::string& text) {
 	optionSet.insertOption(0, "继续");
 }
 
-attr NewTerm::getDelta(const Character* character, const int option) const {
+attr NewTerm::getDelta(const Character* character, const int option, std::string&) const {
 	attr result;
 	if (option == 0) result = newTermContinue(character);
 	else assert(false);
@@ -44,8 +44,6 @@ double NewTerm::getWeight(const Character* character) const {
 attr NewTerm::newTermContinue(const Character* character) const {
 	attr delta;
 	delta[AttributeEnum::term] = 1;
-	delta[AttributeEnum::knowledge] = -character->getSingleAttribute(AttributeEnum::knowledge);
-	delta[AttributeEnum::all_knowledge] = character->getSingleAttribute(AttributeEnum::knowledge);
 	delta[AttributeEnum::midTermExamFinish] = -character->getSingleAttribute(AttributeEnum::midTermExamFinish);
 	delta[AttributeEnum::finalTermExamFinish] = -character->getSingleAttribute(AttributeEnum::finalTermExamFinish);
 	if (character->getSingleAttribute(AttributeEnum::is_of_prp)) delta[AttributeEnum::prp_term_remain] = -1;

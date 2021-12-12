@@ -12,13 +12,13 @@
 
 class FinalTermExam : public Event
 {
-	attr finalTermExamNormallyAttend(const Character* character) const;
+    attr finalTermExamNormallyAttend(const Character* character, std::string&) const;
 
 public:
 	FinalTermExam();
 	FinalTermExam(const std::string& text);
 
-	attr getDelta(const Character* character, const int option) const;
+    attr getDelta(const Character* character, const int option, std::string&) const;
 	double getWeight(const Character* character) const;
 };
 
@@ -35,9 +35,9 @@ FinalTermExam::FinalTermExam(const std::string& text) {
 	optionSet.insertOption(0, "继续");
 }
 
-attr FinalTermExam::getDelta(const Character* character, const int option) const {
+attr FinalTermExam::getDelta(const Character* character, const int option, std::string& message) const {
 	attr result;
-	if (option == 0) result = finalTermExamNormallyAttend(character);
+    if (option == 0) result = finalTermExamNormallyAttend(character, message);
 	else assert(false);
 	return result;
 }
@@ -48,13 +48,24 @@ double FinalTermExam::getWeight(const Character* character) const {
 	return -1;
 }
 
-attr FinalTermExam::finalTermExamNormallyAttend(const Character* character) const {
+attr FinalTermExam::finalTermExamNormallyAttend(const Character* character, std::string& message) const {
 	attr delta;
 	delta[AttributeEnum::finalTermExamFinish] = 1;
-    int finalExamGrade = 50 * character->getSingleAttribute(AttributeEnum::knowledge);
+    int finalExamGrade = 0.5 * character->getSingleAttribute(AttributeEnum::knowledge);
 	if (finalExamGrade < 60) {
         delta[AttributeEnum::bottom_of_pressure] = 40;
 		delta[AttributeEnum::failedCourseAmt] = 1;
+        message = "期末考试不及格，退学警告，压力上升";
 	}
+    else {
+        message = "期末考试合格，分数:" + std::to_string(finalExamGrade);
+    }
+    if (character->getSingleAttribute(AttributeEnum::mid_term_failed)) {
+        delta[AttributeEnum::bottom_of_pressure] -= 40;
+        delta[AttributeEnum::mid_term_failed] = -1;
+    }
+    delta[AttributeEnum::all_knowledge] = finalExamGrade;
+    delta[AttributeEnum::knowledge] = -character->getSingleAttribute(AttributeEnum::knowledge);
+
 	return delta;
 }

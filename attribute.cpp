@@ -22,13 +22,10 @@ int& Attribute::operator[](const AttributeEnum attributeEnum) {
 	return attributes[(int)attributeEnum];
 }
 void Attribute::operator+=(Attribute other) {
-    for (int i = 0; i < 5; i++) {
-        attributes[i] = other[i];
-    }
     assert(other.isDelta);
-    for (int i = 5; i < ATTR_AMT; i++) {
+    for (int i = 0; i < ATTR_AMT; i++) {
         attributes[i] += other[i];
-        if (attributes[i] < 0) attributes[i] = 0;
+        if (i >= 5 && attributes[i] < 0) attributes[i] = 0;
     }
     //调整存在上限的值
     if ((*this)[AttributeEnum::physical_quality] > (*this)[AttributeEnum::top_of_physical_quality])
@@ -39,6 +36,14 @@ void Attribute::operator+=(Attribute other) {
         (*this)[AttributeEnum::pressure] = (*this)[AttributeEnum::bottom_of_pressure];
     if ((*this)[AttributeEnum::pressure] > (ATTR_TYPE)100)
         (*this)[AttributeEnum::pressure] = (ATTR_TYPE)100;
+    if ((*this)[AttributeEnum::midTermExamFinish]) {
+        if ((*this)[AttributeEnum::knowledge] > (ATTR_TYPE)200)
+            (*this)[AttributeEnum::knowledge] = (ATTR_TYPE)200;
+    }
+    else {
+        if ((*this)[AttributeEnum::knowledge] > (ATTR_TYPE)100)
+            (*this)[AttributeEnum::knowledge] = (ATTR_TYPE)100;
+    }
 }
 
 void Attribute::print() {

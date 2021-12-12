@@ -44,6 +44,10 @@ enum class AttributeEnum
     entranceExamFinish = 30,
     midTermExamFinish = 31,
     finalTermExamFinish = 32,
+    corporation_amount = 33,
+    is_mental_ill = 34,
+    is_physical_ill = 35,
+    mid_term_failed = 36,
     attribute_end
 };
 /*

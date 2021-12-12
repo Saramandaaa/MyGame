@@ -20,14 +20,14 @@ public:
 	Prp();
 	Prp(const std::string& text);
 
-	attr getDelta(const Character* character, const int option) const;
+    attr getDelta(const Character* character, const int option, std::string&) const;
 
 	double getWeight(const Character* character) const;
 
 };
 
 Prp::Prp() :
-	Prp("加入PRP")
+    Prp("是否加入PRP项目？加入后，需要在2个学期内进行至少6次PRP活动以通过答辩。完成后将获得科研和知识奖励")
 {
 
 }
@@ -40,7 +40,7 @@ Prp::Prp(const std::string& text) {
 	optionSet.insertOption(1, "不参加");
 }
 
-attr Prp::getDelta(const Character* character, const int option) const {
+attr Prp::getDelta(const Character* character, const int option, std::string&) const {
 	attr result;
 	if (option == 0) result = prpJoin(character);
 	else if (option == 1) result = prpNotJoin(character);
@@ -50,8 +50,9 @@ attr Prp::getDelta(const Character* character, const int option) const {
 
 double Prp::getWeight(const Character* character) const {
 	if (character->getSingleAttribute(AttributeEnum::randomEventCoolDown)) return 0;
+    if (character->getSingleAttribute(AttributeEnum::is_of_novation)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::is_of_prp)) return 0;
-	if (character->getSingleAttribute(AttributeEnum::term) == 1) return 0;
+    if (character->getSingleAttribute(AttributeEnum::term) == 1 || character->getSingleAttribute(AttributeEnum::term) > 6) return 0;
 	if (character->getSingleAttribute(AttributeEnum::all_knowledge) < 80 * character->getSingleAttribute(AttributeEnum::term) - 80) return 0;
 	return weight;
 }

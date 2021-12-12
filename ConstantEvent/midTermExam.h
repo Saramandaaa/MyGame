@@ -9,13 +9,13 @@
 //小于60收到警告：压力下限+0.4（完成期末考试时归0）
 class MidTermExam : public Event
 {
-	attr midTermExamNormallyAttend(const Character* character) const;
+    attr midTermExamNormallyAttend(const Character* character, std::string&) const;
 public:
 	MidTermExam();
 	MidTermExam(const std::string& text);
 
-	attr getDelta(const Character* character, const int option) const;
-	double getWeight(const Character* character) const;
+    attr getDelta(const Character* character, const int option, std::string&) const;
+    double getWeight(const Character* character) const;
 };
 
 MidTermExam::MidTermExam() :
@@ -31,9 +31,9 @@ MidTermExam::MidTermExam(const std::string& text) {
 	optionSet.insertOption(0, "继续");
 }
 
-attr MidTermExam::getDelta(const Character* character, const int option) const {
+attr MidTermExam::getDelta(const Character* character, const int option, std::string& message) const {
 	attr result;
-	if (option == 0) result = midTermExamNormallyAttend(character);
+    if (option == 0) result = midTermExamNormallyAttend(character, message);
 	else assert(false);
 	return result;
 }
@@ -44,10 +44,17 @@ double MidTermExam::getWeight(const Character* character) const {
 	return -1;
 }
 
-attr MidTermExam::midTermExamNormallyAttend(const Character* character) const {
+attr MidTermExam::midTermExamNormallyAttend(const Character* character, std::string& message) const {
 	attr delta;
 	delta[AttributeEnum::midTermExamFinish] = 1;
 	int grade = character->getSingleAttribute(AttributeEnum::knowledge);
-    if (grade < 60) delta[AttributeEnum::bottom_of_pressure] = 40;
+    if (grade < 60) {
+        delta[AttributeEnum::bottom_of_pressure] = 40;
+        delta[AttributeEnum::mid_term_failed] = 1;
+        message = "期中考试不及格，压力上升";
+    }
+    else {
+        message = "期中考试合格，分数:" + std::to_string(grade);
+    }
 	return delta;
 }

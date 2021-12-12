@@ -13,12 +13,12 @@ void Event::changeWeight(const double weight) {
     this->weight = weight;
 }
 
-attr Event::getDelta(const Character*, const int) const {
+attr Event::getDelta(const Character*, const int, std::string&) const {
     attr res;
     return res;
 }
 
-double Event::getWeight(const Character* character) const {
+double Event::getWeight(const Character*) const {
     return weight;
 }
 

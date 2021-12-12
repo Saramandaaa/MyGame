@@ -13,7 +13,7 @@ public:
 	Withdraw();
 	Withdraw(const std::string& text);
 
-	attr getDelta(const Character* character, const int option) const;
+    attr getDelta(const Character* character, const int option, std::string&) const;
 	double getWeight(const Character* character) const;
 
 };
@@ -31,7 +31,7 @@ Withdraw::Withdraw(const std::string& text) {
 	optionSet.insertOption(0, "¼ÌÐø");
 }
 
-attr Withdraw::getDelta(const Character* character, const int option) const {
+attr Withdraw::getDelta(const Character* character, const int option, std::string&) const {
 	attr result;
 	if (option == 0) result = withdrawContinue(character);
 	else assert(false);

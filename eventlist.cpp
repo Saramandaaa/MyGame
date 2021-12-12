@@ -26,7 +26,12 @@ Event* EventList::getNewEvent(const Character* c) {
         random -= weights[eventType];
     }
 
-    Event* result = getEvent((EventEnum)eventType);
+    Event* result;
+    if (eventType == (int)EventEnum::BasicDailyEvent
+     || eventType == (int)EventEnum::PrpDailyEvent
+     || eventType == (int)EventEnum::InnovateProgramDailyEvent)
+        result = getDailyEvent(c);
+    else result = getEvent((EventEnum)eventType);
 
     delete[] weights;
     return result;
@@ -50,9 +55,11 @@ double EventList::getAllWeights(const Character* character, double* weights) {
 }
 
 Event* EventList::getDailyEvent(const Character *c) {
-    DailyEvent *result = new DailyEvent("学期" + std::to_string(c->getSingleAttribute(AttributeEnum::term)) + " 日常事件");
+    DailyEvent *result = new DailyEvent("每天的日常...");
     if (c->getSingleAttribute(AttributeEnum::is_of_prp)) result->addPrp();
     if (c->getSingleAttribute(AttributeEnum::is_of_novation)) result->addNovation();
+    if (c->getSingleAttribute(AttributeEnum::is_mental_ill) || c->getSingleAttribute(AttributeEnum::is_physical_ill))
+        result->ill(c);
     return (Event*)result;
 }
 

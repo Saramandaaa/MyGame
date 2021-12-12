@@ -17,13 +17,13 @@ public:
 	SayGoodBye();
 	SayGoodBye(const std::string& text);
 
-	attr getDelta(const Character* character, const int optino) const;
+    attr getDelta(const Character* character, const int option, std::string&) const;
 	double getWeight(const Character* character) const;
 
 };
 
 SayGoodBye::SayGoodBye() :
-	SayGoodBye("流水无情")
+    SayGoodBye("流水无情，你与恋人分手了，内心十分痛苦，学习效率下降")
 {
 
 }
@@ -35,7 +35,7 @@ SayGoodBye::SayGoodBye(const std::string& text) {
 	optionSet.insertOption(0, "继续");
 }
 
-attr SayGoodBye::getDelta(const Character* character, const int option) const {
+attr SayGoodBye::getDelta(const Character* character, const int option, std::string&) const {
 	attr result;
 	if (option == 0) result = sayGoodByeContinue(character);
 	else assert(false);
@@ -55,6 +55,7 @@ attr SayGoodBye::sayGoodByeContinue(const Character* character) const {
 	delta[AttributeEnum::randomEventCoolDown] = 1;
 	delta[AttributeEnum::is_of_love] = -1;
 	delta[AttributeEnum::top_of_study_rate] = 70 - character->getSingleAttribute(AttributeEnum::top_of_study_rate);
-	delta[AttributeEnum::goodByeDay] = 11;
+    delta[AttributeEnum::goodByeDay] = 11;
+    delta[AttributeEnum::time_love] = -character->getSingleAttribute(AttributeEnum::time_love);
 	return delta;
 }
