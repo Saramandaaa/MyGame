@@ -46,7 +46,7 @@ attr PrpFinish::prpFinishContinue(const Character* character, std::string& messa
 	delta[AttributeEnum::is_of_prp] = -1;
 	delta[AttributeEnum::bottom_of_pressure] = -20;
     if (character->getSingleAttribute(AttributeEnum::number_prp) >= 6) {
-		delta[AttributeEnum::all_knowledge] = 4 * character->getSingleAttribute(AttributeEnum::number_prp);
+        delta[AttributeEnum::all_knowledge] = 1.5 * character->getSingleAttribute(AttributeEnum::number_prp);
 		delta[AttributeEnum::scientific_research_time] = 1;
         message = "PRP答辩成功完成，科研经历增加，总体知识水平增加";
 	}

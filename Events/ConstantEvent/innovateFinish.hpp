@@ -46,7 +46,7 @@ attr InnovateFinish::innovateFinishContinue(const Character* character, std::str
 	delta[AttributeEnum::is_of_novation] = -1;
 	delta[AttributeEnum::bottom_of_pressure] = -30;
     if (character->getSingleAttribute(AttributeEnum::number_novation) >= 9) {
-		delta[AttributeEnum::all_knowledge] = 6 * character->getSingleAttribute(AttributeEnum::number_novation);
+        delta[AttributeEnum::all_knowledge] = 2 * character->getSingleAttribute(AttributeEnum::number_novation);
 		delta[AttributeEnum::scientific_research_time] = 2;
         message = "大创答辩成功完成，科研经历增加，总体知识水平增加";
 	}
