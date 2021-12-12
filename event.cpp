@@ -22,6 +22,11 @@ double Event::getWeight(const Character* character) const {
     return weight;
 }
 
+bool Event::comparePriority(Event* first, Event* second) const {
+    if (first->priority <= second->priority) return true;
+    else return false;
+}
+
 Event::~Event() {
     std::string().swap(this->text);
 }
@@ -31,6 +36,7 @@ attr TestEvent::getDelta(const Character*, const int option) const {
     res[AttributeEnum::physical_quality] = option + 1;
     return res;
 }
+
 
 std::string getEventName(int type) {
     switch (type) {

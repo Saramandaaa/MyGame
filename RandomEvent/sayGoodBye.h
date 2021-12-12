@@ -14,12 +14,19 @@ class SayGoodBye : public Event
 	attr sayGoodByeContinue(const Character* character) const;
 
 public:
+	SayGoodBye();
 	SayGoodBye(const std::string& text);
 
 	attr getDelta(const Character* character, const int optino) const;
 	double getWeight(const Character* character) const;
 
 };
+
+SayGoodBye::SayGoodBye() :
+	SayGoodBye("流水无情")
+{
+
+}
 
 SayGoodBye::SayGoodBye(const std::string& text) {
     type = EventEnum::sayGoodBye;
@@ -36,6 +43,7 @@ attr SayGoodBye::getDelta(const Character* character, const int option) const {
 }
 
 double SayGoodBye::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::randomEventCoolDown)) return 0;
 	if (!character->getSingleAttribute(AttributeEnum::is_of_love)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::pressure) <= 70) return 0;
 	double weight = 0.1 * this->weight;
@@ -44,8 +52,9 @@ double SayGoodBye::getWeight(const Character* character) const {
 
 attr SayGoodBye::sayGoodByeContinue(const Character* character) const {
 	attr delta;
+	delta[AttributeEnum::randomEventCoolDown] = 1;
 	delta[AttributeEnum::is_of_love] = -1;
 	delta[AttributeEnum::top_of_study_rate] = 70 - character->getSingleAttribute(AttributeEnum::top_of_study_rate);
-	delta[AttributeEnum::goodByeDay] = 10;
+	delta[AttributeEnum::goodByeDay] = 11;
 	return delta;
 }

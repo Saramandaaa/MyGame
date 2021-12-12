@@ -17,6 +17,7 @@ class Prp : public Event
 	attr prpJoin(const Character* character) const;
 	attr prpNotJoin(const Character* character) const;
 public:
+	Prp();
 	Prp(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
@@ -24,6 +25,12 @@ public:
 	double getWeight(const Character* character) const;
 
 };
+
+Prp::Prp() :
+	Prp("¼ÓÈëPRP")
+{
+
+}
 
 Prp::Prp(const std::string& text) {
     type = EventEnum::Prp;
@@ -42,6 +49,7 @@ attr Prp::getDelta(const Character* character, const int option) const {
 }
 
 double Prp::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::randomEventCoolDown)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::is_of_prp)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::term) == 1) return 0;
 	if (character->getSingleAttribute(AttributeEnum::all_knowledge) < 80 * character->getSingleAttribute(AttributeEnum::term) - 80) return 0;
@@ -50,6 +58,7 @@ double Prp::getWeight(const Character* character) const {
 
 attr Prp::prpJoin(const Character*) const {
 	attr delta;
+	delta[AttributeEnum::randomEventCoolDown] = 1;
     delta[AttributeEnum::bottom_of_pressure] = 20;
 	delta[AttributeEnum::is_of_prp] = 1;
 	delta[AttributeEnum::prp_term_remain] = 2;
@@ -58,5 +67,6 @@ attr Prp::prpJoin(const Character*) const {
 
 attr Prp::prpNotJoin(const Character*) const {
 	attr delta;
+	delta[AttributeEnum::randomEventCoolDown] = 1;
 	return delta;
 }

@@ -11,14 +11,22 @@ class MidTermExam : public Event
 {
 	attr midTermExamNormallyAttend(const Character* character) const;
 public:
+	MidTermExam();
 	MidTermExam(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
 	double getWeight(const Character* character) const;
 };
 
+MidTermExam::MidTermExam() :
+	MidTermExam("ÆÚÖÐ¿¼ÊÔ")
+{
+
+}
+
 MidTermExam::MidTermExam(const std::string& text) {
     type = EventEnum::MidTermExam;
+	priority = 3000;
 	changeText(text);
 	optionSet.insertOption(0, "¼ÌÐø");
 }
@@ -31,12 +39,14 @@ attr MidTermExam::getDelta(const Character* character, const int option) const {
 }
 
 double MidTermExam::getWeight(const Character* character) const {
-	if ((character->getSingleAttribute(AttributeEnum::day) - 62) % 126) return 0;
-	return weight * 10000;
+	if (character->getSingleAttribute(AttributeEnum::midTermExamFinish)) return 0;
+	if ((character->getSingleAttribute(AttributeEnum::day) - 10) % 20 != 0) return 0;
+	return -1;
 }
 
 attr MidTermExam::midTermExamNormallyAttend(const Character* character) const {
 	attr delta;
+	delta[AttributeEnum::midTermExamFinish] = 1;
 	int grade = character->getSingleAttribute(AttributeEnum::knowledge);
     if (grade < 60) delta[AttributeEnum::bottom_of_pressure] = 40;
 	return delta;

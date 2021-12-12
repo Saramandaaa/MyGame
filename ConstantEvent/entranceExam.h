@@ -10,6 +10,7 @@ class EntranceExam : public Event
 {
 	attr entranceExamNormallyAttend(const Character* character) const;
 public:
+	EntranceExam();
 	EntranceExam(const std::string& text);
 
     attr getDelta(const Character* character, const int option) const;
@@ -17,8 +18,15 @@ public:
 	double getWeight(const Character* character) const;
 };
 
+EntranceExam::EntranceExam() :
+	EntranceExam("入学考试，决定你的大学学习方向")
+{
+
+}
+
 EntranceExam::EntranceExam(const std::string& text) {
     type = EventEnum::entranceExam;
+	priority = 5000;
 	changeText(text);
 	optionSet.insertOption(0, "继续");
 }
@@ -31,10 +39,12 @@ attr EntranceExam::getDelta(const Character* character, const int option) const 
 }
 
 double EntranceExam::getWeight(const Character* character) const {
-	if (character->getSingleAttribute(AttributeEnum::day) != 1) return 0;
-	return weight * 10000;
+	if (character->getSingleAttribute(AttributeEnum::day) != 2 || character->getSingleAttribute(AttributeEnum::entranceExamFinish)) return 0;
+	return -1;
 }
 
 attr EntranceExam::entranceExamNormallyAttend(const Character*) const {
-	return attr();
+	attr delta;
+	delta[AttributeEnum::entranceExamFinish] = 1;
+	return delta;
 }

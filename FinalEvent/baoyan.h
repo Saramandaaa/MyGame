@@ -10,6 +10,7 @@ class Baoyan : public Event
 	attr baoyanContinue(const Character* character) const;
 
 public:
+	Baoyan();
 	Baoyan(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
@@ -17,8 +18,15 @@ public:
 
 };
 
+Baoyan::Baoyan() :
+	Baoyan("保研人上人")
+{
+
+}
+
 Baoyan::Baoyan(const std::string& text) {
     type = EventEnum::Baoyan;
+	priority = 30000;
 	changeText(text);
 	optionSet.insertOption(0, "继续");
 }
@@ -31,11 +39,11 @@ attr Baoyan::getDelta(const Character* character, const int option) const {
 }
 
 double Baoyan::getWeight(const Character* character) const {
-	if (character->getSingleAttribute(AttributeEnum::day) != 1008) return 0;
+	if (character->getSingleAttribute(AttributeEnum::day) != 161) return 0;
 	if (character->getSingleAttribute(AttributeEnum::scientific_research_time) < 1
 		|| character->getSingleAttribute(AttributeEnum::failedCourseAmt) >= 1
 		|| character->getSingleAttribute(AttributeEnum::all_knowledge) < 720) return 0;
-	return weight * 100000000;
+	return -1;
 }
 
 attr Baoyan::baoyanContinue(const Character*) const {

@@ -10,14 +10,22 @@ class InnovateFinish : public Event
 	attr innovateFinishContinue(const Character* character) const;
 
 public:
+	InnovateFinish();
 	InnovateFinish(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
 	double getWeight(const Character* character) const;
 };
 
+InnovateFinish::InnovateFinish() :
+	InnovateFinish("´ó´´´ð±ç")
+{
+
+}
+
 InnovateFinish::InnovateFinish(const std::string& text) {
 	type = EventEnum::InnovateFinish;
+	priority = 2100;
 	changeText(text);
 	optionSet.insertOption(0, "¼ÌÐø");
 }
@@ -32,7 +40,7 @@ attr InnovateFinish::getDelta(const Character* character, const int option) cons
 double InnovateFinish::getWeight(const Character* character) const {
 	if (!character->getSingleAttribute(AttributeEnum::is_of_novation)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::innovate_term_remain)) return 0;
-	return weight * 10000;
+	return -1;
 }
 
 attr InnovateFinish::innovateFinishContinue(const Character* character) const {

@@ -10,14 +10,22 @@ class PrpFinish : public Event
 	attr prpFinishContinue(const Character* character) const;
 
 public:
+	PrpFinish();
 	PrpFinish(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
 	double getWeight(const Character* character) const;
 };
 
+PrpFinish::PrpFinish() :
+	PrpFinish("PRP´ð±ç")
+{
+
+}
+
 PrpFinish::PrpFinish(const std::string& text) {
 	type = EventEnum::PrpFinish;
+	priority = 2000;
 	changeText(text);
 	optionSet.insertOption(0, "¼ÌÐø");
 }
@@ -32,7 +40,7 @@ attr PrpFinish::getDelta(const Character* character, const int option) const {
 double PrpFinish::getWeight(const Character* character) const {
 	if (!character->getSingleAttribute(AttributeEnum::is_of_prp)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::prp_term_remain)) return 0;
-	return weight * 10000;
+	return -1;
 }
 
 attr PrpFinish::prpFinishContinue(const Character* character) const {

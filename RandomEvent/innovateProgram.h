@@ -17,12 +17,19 @@ class InnovateProgram : public Event
 	attr innovateProgramNotJoin(const Character* character) const;
 
 public:
+	InnovateProgram();
 	InnovateProgram(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
 	double getWeight(const Character* character) const;
 	
 };
+
+InnovateProgram::InnovateProgram() :
+	InnovateProgram("加入大创")
+{
+
+}
 
 InnovateProgram::InnovateProgram(const std::string& text) {
     type = EventEnum::InnovateProgram;
@@ -40,6 +47,7 @@ attr InnovateProgram::getDelta(const Character* character, const int option) con
 }
 
 double InnovateProgram::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::randomEventCoolDown)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::is_of_novation)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::term) == 1) return 0;
 	if (character->getSingleAttribute(AttributeEnum::all_knowledge) < 85 * character->getSingleAttribute(AttributeEnum::term) - 85) return 0;
@@ -48,6 +56,7 @@ double InnovateProgram::getWeight(const Character* character) const {
 
 attr InnovateProgram::innovateProgramJoin(const Character*) const {
 	attr delta;
+	delta[AttributeEnum::randomEventCoolDown] = 1;
 	delta[AttributeEnum::is_of_novation] = 1;
     delta[AttributeEnum::bottom_of_pressure] = 30;
 	delta[AttributeEnum::innovate_term_remain] = 3;
@@ -56,5 +65,6 @@ attr InnovateProgram::innovateProgramJoin(const Character*) const {
 
 attr InnovateProgram::innovateProgramNotJoin(const Character*) const {
 	attr delta;
+	delta[AttributeEnum::randomEventCoolDown] = 1;
 	return delta;
 }

@@ -56,10 +56,12 @@ public:
     void changeText(const std::string&);
     void changeWeight(const double);
     virtual ~Event();
-    Event() : weight(1) {};
-    Event(const std::string& t) : text(t), weight(1) {};
+    Event() : weight(1), priority(0) {};
+    Event(const std::string& t) : text(t), weight(1), priority(0) {};
     OptionSet optionSet;
     EventEnum type;
+    int priority;
+    bool comparePriority(Event* first, Event* second) const;
 private:
     std::string text;
 protected:

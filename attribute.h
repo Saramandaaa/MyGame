@@ -40,6 +40,10 @@ enum class AttributeEnum
     day = 26,
     goodByeDay = 27,
     voteCoolDown = 28,
+    randomEventCoolDown = 29,
+    entranceExamFinish = 30,
+    midTermExamFinish = 31,
+    finalTermExamFinish = 32,
     attribute_end
 };
 /*
@@ -68,6 +72,10 @@ enum class AttributeEnum
     int    day=1;                         //当前天数
     int    goodBydDay=0;                  //失恋缓冲天数
     int    voteCoolDown=0;                //vote事件冷却时间
+    int    randomEventCoolDown=0;         //随机事件冷却
+    int    entranceExamFinish=0;          //是否经历入学考试
+    int    midTermExamFinish=0;           //本学期是否经历期中考试
+    int    finalTermExamFinish=0;         //本学期是否经历期末考试
     */
 
 

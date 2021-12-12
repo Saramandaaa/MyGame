@@ -13,12 +13,19 @@ class PhysicalDisease : public Event
 	attr physicalDiseaseContinue(const Character* character) const;
 
 public:
+	PhysicalDisease();
 	PhysicalDisease(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
 	double getWeight(const Character* character) const;
 
 };
+
+PhysicalDisease::PhysicalDisease() :
+	PhysicalDisease("Èõ²»½û·ç")
+{
+
+}
 
 PhysicalDisease::PhysicalDisease(const std::string& text) {
     type = EventEnum::physicalDisease;
@@ -35,6 +42,7 @@ attr PhysicalDisease::getDelta(const Character* character, const int option) con
 }
 
 double PhysicalDisease::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::randomEventCoolDown)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::physical_quality)
 		>= character->getSingleAttribute(AttributeEnum::top_of_physical_quality) * 0.2) return 0;
 	double weight = (101
@@ -46,6 +54,7 @@ double PhysicalDisease::getWeight(const Character* character) const {
 
 attr PhysicalDisease::physicalDiseaseContinue(const Character*) const {
 	attr delta;
+	delta[AttributeEnum::randomEventCoolDown] = 1;
 	delta[AttributeEnum::top_of_physical_quality] = -10;
 	delta[AttributeEnum::physical_quality] = -10;
 	return delta;

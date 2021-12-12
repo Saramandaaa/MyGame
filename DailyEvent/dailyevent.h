@@ -7,6 +7,7 @@
 class DailyEvent : public Event {
 public:
     //构造函数，需要提供事件描述，在eventlist中用于创建事件实体
+    DailyEvent();
     DailyEvent(const std::string t);
     //c为角色，o为选择的选项，从0开始编号
     //对于日常事件，0学习，1运动，2娱乐，3prp，4大创
@@ -28,6 +29,12 @@ private:
     attr daily_event_prp(const Character* c) const;
     attr daily_event_novation(const Character* c) const;
 };
+
+DailyEvent::DailyEvent() :
+    DailyEvent("日常")
+{
+
+}
 
 DailyEvent::DailyEvent(const std::string t) {
     type = EventEnum::BasicDailyEvent;
@@ -55,6 +62,10 @@ attr DailyEvent::getDelta(const Character* c, const int o) const {
     else if (o == 3) result = daily_event_prp(c);
     else if (o == 4) result = daily_event_novation(c);
     else assert(false);
+    result[AttributeEnum::day] = 1;
+    if (c->getSingleAttribute(AttributeEnum::is_of_love)) result[AttributeEnum::time_love] = 1;
+    if (c->getSingleAttribute(AttributeEnum::goodByeDay)) result[AttributeEnum::goodByeDay] = -1;
+    if (c->getSingleAttribute(AttributeEnum::randomEventCoolDown)) result[AttributeEnum::randomEventCoolDown] = -1;
     //修改最近的事件
     return change_affairs(c, o, result);
 }
@@ -75,7 +86,7 @@ double DailyEvent::getWeight(const Character* character) const {
         assert(false);
         break;
     }
-    return weight * 0.01;
+    return weight * 1;
 }
 
 attr DailyEvent::change_affairs(const Character* c, const int o, attr delta) const {

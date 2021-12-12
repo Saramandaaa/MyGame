@@ -13,13 +13,19 @@ class MentalDisease : public Event
 	attr mentalDiseaseContinue(const Character* character) const;
 
 public:
-
+	MentalDisease();
 	MentalDisease(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
 
 	double getWeight(const Character* character) const;
 };
+
+MentalDisease::MentalDisease() :
+	MentalDisease("ÓñÓñÖ¢")
+{
+
+}
 
 MentalDisease::MentalDisease(const std::string& text) {
     type = EventEnum::mentalDisease;
@@ -36,6 +42,7 @@ attr MentalDisease::getDelta(const Character* character, const int option) const
 }
 
 double MentalDisease::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::randomEventCoolDown)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::pressure)
 		<= character->getSingleAttribute(AttributeEnum::bottom_of_pressure) * 0.2 + 80) return 0;
 	double weight = character->getSingleAttribute(AttributeEnum::pressure) * 0.01 * this->weight;
@@ -44,6 +51,7 @@ double MentalDisease::getWeight(const Character* character) const {
 
 attr MentalDisease::mentalDiseaseContinue(const Character*) const {
 	attr delta;
+	delta[AttributeEnum::randomEventCoolDown] = 1;
     delta[AttributeEnum::bottom_of_pressure] = 10;
     delta[AttributeEnum::pressure] = 10;
 	return delta;

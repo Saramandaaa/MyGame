@@ -15,11 +15,18 @@ class Love : public Event
 	attr loveRefuse(const Character* character) const;
 
 public:
+	Love();
 	Love(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
 	double getWeight(const Character* character) const;
 };
+
+Love::Love() :
+	Love("Áµ°®")
+{
+
+}
 
 Love::Love(const std::string& text) {
     type = EventEnum::Love;
@@ -38,6 +45,7 @@ attr Love::getDelta(const Character* character, const int option) const {
 }
 
 double Love::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::randomEventCoolDown)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::is_of_love)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::number_love) >= 2) return 0;
 	double weight = (0.01 + character->getSingleAttribute(AttributeEnum::social) * 0.00005) * this->weight;
@@ -46,6 +54,7 @@ double Love::getWeight(const Character* character) const {
 
 attr Love::loveAccept(const Character* character) const {
 	attr delta;
+	delta[AttributeEnum::randomEventCoolDown] = 1;
 	delta[AttributeEnum::top_of_study_rate] = 130 - character->getSingleAttribute(AttributeEnum::top_of_study_rate);
 	delta[AttributeEnum::is_of_love] = 1;
 	delta[AttributeEnum::number_love] = 1;
@@ -55,5 +64,6 @@ attr Love::loveAccept(const Character* character) const {
 
 attr Love::loveRefuse(const Character*) const {
 	attr delta;
+	delta[AttributeEnum::randomEventCoolDown] = 1;
 	return delta;
 }

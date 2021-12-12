@@ -1,9 +1,12 @@
+#include "eventHeap.h"
 #include "eventlist.h"
 #include "event.h"
 #include "eventheader.h"
 #include <ctime>
 
 RandSummoner EventList::rs((int)time(NULL));
+EventHeap EventList::eventHeap;
+int EventList::preEvent;
 
 void EventList::load(SaveInfo info) {
     rs.load(info.seed, info.stepAMT);
@@ -13,8 +16,10 @@ Event* EventList::getNewEvent(const Character* c) {
     //main function here
     double* weights = new double[EVENT_AMT];
     double total = getAllWeights(c, weights);
-    double random = rs.step() * total;
 
+    if (eventHeap.length) return eventHeap.pop();
+
+    double random = rs.step() * total;
     int eventType = 0;
 
     for (; eventType < EVENT_AMT && random >= weights[eventType]; eventType++) {
@@ -29,10 +34,16 @@ Event* EventList::getNewEvent(const Character* c) {
 
 double EventList::getAllWeights(const Character* character, double* weights) {
     Event* temp;
+    double tempWeight;
     double total = 0;
     for (int i = 0; i < EVENT_AMT; i++) {
         temp = getEvent((EventEnum)i);
-        weights[i] = temp->getWeight(character);
+        tempWeight = temp->getWeight(character);
+        if (tempWeight < -0.5) {
+            weights[i] = 0;
+            eventHeap.insert(temp);
+        }
+        else weights[i] = tempWeight;
         total += weights[i];
     }
     return total;
@@ -77,86 +88,86 @@ Event* EventList::getEvent(EventEnum type) {
     void* event;
     switch (type) {
         case EventEnum::BasicDailyEvent:
-            event = new DailyEvent("");
+            event = new DailyEvent();
         break;
 
         case EventEnum::PrpDailyEvent:
-            event = new DailyEvent("");
+            event = new DailyEvent();
             ((DailyEvent*)event)->addPrp();
         break;
 
         case EventEnum::InnovateProgramDailyEvent:
-            event = new DailyEvent("");
+            event = new DailyEvent();
             ((DailyEvent*)event)->addNovation();
         break;
 
         case EventEnum::MidTermExam:
-            event = new MidTermExam("");
+            event = new MidTermExam();
         break;
 
         case EventEnum::finalTermExam:
-            event = new FinalTermExam("");
+            event = new FinalTermExam();
         break;
 
         case EventEnum::entranceExam:
-            event = new EntranceExam("");
+            event = new EntranceExam();
         break;
 
         case EventEnum::newTerm:
-            event = new NewTerm("");
+            event = new NewTerm();
         break;
 
         case EventEnum::Prp:
-            event = new Prp("");
+            event = new Prp();
         break;
 
         case EventEnum::InnovateProgram:
-            event = new InnovateProgram("");
+            event = new InnovateProgram();
         break;
 
         case EventEnum::JoinCorporation:
-            event = new JoinCorporation("");
+            event = new JoinCorporation();
         break;
 
         case EventEnum::VoteStudentAssociation:
-            event = new VoteStudentAssociation("");
+            event = new VoteStudentAssociation();
         break;
 
         case EventEnum::Love:
-            event = new Love("");
+            event = new Love();
         break;
 
         case EventEnum::sayGoodBye:
-            event = new SayGoodBye("");
+            event = new SayGoodBye();
         break;
 
         case EventEnum::physicalDisease:
-            event = new PhysicalDisease("");
+            event = new PhysicalDisease();
         break;
 
         case EventEnum::mentalDisease:
-            event = new MentalDisease("");
+            event = new MentalDisease();
         break;
 
         case EventEnum::Withdraw:
-            event = new Withdraw("");
+            event = new Withdraw();
         break;
 
         case EventEnum::Baoyan:
-            event = new Baoyan("");
+            event = new Baoyan();
         break;
 
         case EventEnum::Work:
-            event = new Work("");
+            event = new Work();
         break;
         case EventEnum::InnovateFinish:
-            event = new InnovateFinish("");
+            event = new InnovateFinish();
         break;
         case EventEnum::PrpFinish:
-            event = new PrpFinish("");
+            event = new PrpFinish();
         break;
         case EventEnum::TotallyGoodBye:
-            event = new TotallyGoodBye("");
+            event = new TotallyGoodBye();
         break;
         default:
             event = nullptr;

@@ -14,11 +14,18 @@ class JoinCorporation : public Event
 	attr joinCorporationNotJoin(const Character* character) const;
 
 public:
+	JoinCorporation();
 	JoinCorporation(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
 	double getWeight(const Character* character) const;
 };
+
+JoinCorporation::JoinCorporation() :
+	JoinCorporation("加入社团")
+{
+
+}
 
 JoinCorporation::JoinCorporation(const std::string& text) {
     type = EventEnum::JoinCorporation;
@@ -36,6 +43,7 @@ attr JoinCorporation::getDelta(const Character* character, const int option) con
 }
 
 double JoinCorporation::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::randomEventCoolDown)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::day) != 63) return 0;
 	double weight = (0.5 + character->getSingleAttribute(AttributeEnum::social) * 0.00e1) * this->weight;
 	return weight;
@@ -43,10 +51,12 @@ double JoinCorporation::getWeight(const Character* character) const {
 
 attr JoinCorporation::joinCorporationJoin(const Character*) const {
 	attr delta;
+	delta[AttributeEnum::randomEventCoolDown] = 1;
 	delta[AttributeEnum::study_rate] = 100;
 	return delta;
 }
 attr JoinCorporation::joinCorporationNotJoin(const Character*) const {
 	attr delta;
+	delta[AttributeEnum::randomEventCoolDown] = 1;
 	return delta;
 }

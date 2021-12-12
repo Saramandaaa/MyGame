@@ -14,6 +14,7 @@ class VoteStudentAssociation : public Event
 	attr voteStudentAssociationJoin(const Character* character) const;
 	attr voteStudentAssociationNotJoin(const Character* character) const;
 public:
+	VoteStudentAssociation();
 	VoteStudentAssociation(const std::string& text);
 
 	attr getDelta(const Character* character, const int option) const;
@@ -21,6 +22,12 @@ public:
 	double getWeight(const Character* character) const;
 
 };
+
+VoteStudentAssociation::VoteStudentAssociation() :
+	VoteStudentAssociation("¹âÈÙÖ¾Ô¸Õß")
+{
+
+}
 
 VoteStudentAssociation::VoteStudentAssociation(const std::string& text) {
     type = EventEnum::VoteStudentAssociation;
@@ -39,12 +46,14 @@ attr VoteStudentAssociation::getDelta(const Character* character, const int opti
 }
 
 double VoteStudentAssociation::getWeight(const Character* character) const {
+	if (character->getSingleAttribute(AttributeEnum::randomEventCoolDown)) return 0;
 	if (character->getSingleAttribute(AttributeEnum::voteCoolDown)) return 0;
 	return weight * 0.03;
 }
 
 attr VoteStudentAssociation::voteStudentAssociationJoin(const Character* character) const {
 	attr delta;
+	delta[AttributeEnum::randomEventCoolDown] = 1;
 	delta[AttributeEnum::study_rate] = 100 - character->getSingleAttribute(AttributeEnum::study_rate);
 	delta[AttributeEnum::voteCoolDown] = 2;
 	return delta;

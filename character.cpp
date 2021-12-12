@@ -14,8 +14,8 @@ Character::Character() {
     attribute[AttributeEnum::affair2] = -1;
     attribute[AttributeEnum::affair3] = -1;
     attribute[AttributeEnum::affair4] = -1;
-    attribute[AttributeEnum::day] = 0;
-    attribute[AttributeEnum::bottom_of_pressure] = 100;
+    attribute[AttributeEnum::day] = 1;
+    attribute[AttributeEnum::bottom_of_pressure] = 0;
 }
 Character::Character(attr a) {
     attribute = a;
@@ -36,8 +36,6 @@ ATTR_TYPE Character::getSingleAttribute(AttributeEnum name) const {
 
 Character* Character::update(const attr& delta) {
     attribute += delta;
-    if (getSingleAttribute(AttributeEnum::is_of_love)) updateSingle(AttributeEnum::time_love, 1, true);
-    if (!attribute[AttributeEnum::is_of_love] && attribute[AttributeEnum::goodByeDay]) updateSingle(AttributeEnum::goodByeDay, -1, true);
     return this;
 }
 
