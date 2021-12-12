@@ -1,9 +1,7 @@
 #include<string>
 #include<assert.h>
 
-#include "attribute.h"
-#include "character.h"
-#include "event.h"
+#include "Headers/basicheader.h"
 
 //本学期知识水平输出，期中成绩=本学期知识水平*100(大于100也即100);
 //小于60收到警告：压力下限+0.4（完成期末考试时归0）

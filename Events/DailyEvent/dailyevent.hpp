@@ -1,8 +1,7 @@
-#include "attribute.h"
-#include "character.h"
-#include "event.h"
 #include <string>
 #include <assert.h>
+
+#include "Headers/basicheader.h"
 
 class DailyEvent : public Event {
 public:

@@ -1,14 +1,14 @@
 #ifndef SAVEINFO_H
 #define SAVEINFO_H
 
-#include "event.h"
-#include "character.h"
-#include "randsummoner.h"
 #include <string>
 #include <vector>
 #include <fstream>
 #include <QFile>
 #include <QDir>
+
+#include "Headers/basicheader.h"
+#include "Headers/utility/randsummoner.h"
 
 class SaveInfo {
 public:

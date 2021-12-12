@@ -2,8 +2,7 @@
 #define CONTROLLER_H
 
 #include <QObject>
-#include "event.h"
-#include "character.h"
+#include "Headers/basicheader.h"
 
 class Controller : public QObject{
     Q_OBJECT

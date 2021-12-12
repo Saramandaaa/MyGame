@@ -1,11 +1,12 @@
-#include "loadsave.h"
-#include "ui_loadsave.h"
-#include "textcode.h"
 #include <QDebug>
 #include <assert.h>
-#include "saveinfo.h"
-#include "startmenu.h"
 #include <QMessageBox>
+
+#include "ui_loadsave.h"
+#include "Headers/GUI/loadsave.h"
+#include "Headers/GUI/startmenu.h"
+#include "Headers/utility/textcode.h"
+#include "Headers/utility/saveinfo.h"
 
 LoadSave::LoadSave(QWidget *parent, bool is_save_mode)
     : QWidget(parent)

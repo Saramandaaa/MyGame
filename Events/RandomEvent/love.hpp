@@ -1,9 +1,7 @@
 #include<string>
 #include<assert.h>
 
-#include "attribute.h"
-#include "character.h"
-#include "event.h"
+#include "Headers/basicheader.h"
 
 //触发概率=0.01+社交力*0.005
 //触发条件：无

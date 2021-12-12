@@ -1,8 +1,9 @@
 // 2021.12.6, 23:00. By Saramanda, add limit to operator +=
 
-#include "attribute.h"
 #include <assert.h>
 #include <QDebug>
+
+#include "Headers/basic/attribute.h"
 
 Attribute::Attribute() {
 	isDelta = true;

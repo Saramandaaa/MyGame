@@ -7,15 +7,16 @@
 #include <string>
 #include <vector>
 #include <QDebug>
-#include "controller.h"
-#include "event.h"
-#include "saveinfo.h"
 #include <QTextCodec>
 #include <QVBoxLayout>
 #include <QPointer>
 #include <QDebug>
 #include <QTableWidget>
 #include <QTableWidgetItem>
+
+#include "Headers/controller.h"
+#include "Headers/basicheader.h"
+#include "Headers/utility/saveinfo.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

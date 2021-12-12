@@ -1,5 +1,3 @@
-// 2021.12.6, 19:23. By Saramanda
-
 #ifndef _ATTRIBUTE_H_
 #define _ATTRIBUTE_H_
 #include <cstdio>

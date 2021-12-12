@@ -1,9 +1,9 @@
-#include"controller.h"
-#include"event.h"
-#include"character.h"
-#include"eventlist.h"
-#include"mainwindow.h"
-#include<qdebug.h>
+#include<QDebug>
+
+#include "Headers/basicheader.h"
+#include "Headers/controller.h"
+#include "Headers/eventlist.h"
+#include "Headers/GUI/mainwindow.h"
 
 Controller::Controller() {
     currentEvent = nullptr;

@@ -1,5 +1,4 @@
-// Update at 11/30, 22:50. By ÌÆè÷ð©, Ìí¼ÓOptionSet
-#include"event.h"
+#include "Headers/basic/event.h"
 
 std::string Event::getText() const {
     return this->text;

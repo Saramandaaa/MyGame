@@ -1,9 +1,7 @@
 #include<string>
 #include<assert.h>
 
-#include "attribute.h"
-#include "character.h"
-#include "event.h"
+#include "Headers/basicheader.h"
 
 //优化：由初始值决定专业分流情况
 class EntranceExam : public Event

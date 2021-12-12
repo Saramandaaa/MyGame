@@ -1,11 +1,12 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "event.h"
-#include "loadsave.h"
-#include "textcode.h"
-#include "eventlist.h"
 #include <QCloseEvent>
 #include <QMenu>
+
+#include "ui_mainwindow.h"
+#include "Headers/basicheader.h"
+#include "Headers/eventlist.h"
+#include "Headers/GUI/mainwindow.h"
+#include "Headers/GUI/loadsave.h"
+#include "Headers/utility/textcode.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

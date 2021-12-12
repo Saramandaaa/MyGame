@@ -1,9 +1,7 @@
 #include<string>
 #include<assert.h>
 
-#include "attribute.h"
-#include "character.h"
-#include "event.h"
+#include "Headers/basicheader.h"
 
 //触发概率=0.5+社交力*0.1;
 //触发条件：仅在第一学期期中后的第一个日常事件

@@ -1,6 +1,6 @@
-// 2021.12.3, 11:00. By ÌÆè÷ğ©, ´ó·ùÖØ¹¹. 
-#include "character.h"
 #include <assert.h>
+
+#include "Headers/basic/character.h"
 
 Character::Character() {
     attribute.isDelta = false;

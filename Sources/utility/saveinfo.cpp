@@ -1,11 +1,12 @@
-#include "saveinfo.h"
-#include "eventlist.h"
 #include <QDebug>
 #include <QDir>
 #include <QDataStream>
 #include <assert.h>
 #include <QDateTime>
-#include "textcode.h"
+
+#include "Headers/utility/textcode.h"
+#include "Headers/utility/saveinfo.h"
+#include "Headers/eventlist.h"
 
 SaveInfo::SaveInfo() {
 

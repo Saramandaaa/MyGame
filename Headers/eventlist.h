@@ -1,11 +1,10 @@
 #ifndef EVENTLIST_H
 #define EVENTLIST_H
 
-#include "eventHeap.h"
-#include "character.h"
-#include "event.h"
-#include "saveinfo.h"
-#include "randsummoner.h"
+#include "Headers/basicheader.h"
+#include "Headers/eventHeap.h"
+#include "Headers/utility/saveinfo.h"
+#include "Headers/utility/randsummoner.h"
 
 class EventList {
 public:

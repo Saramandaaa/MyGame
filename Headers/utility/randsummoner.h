@@ -1,5 +1,3 @@
-// 2021.12.7, 20:20. By 唐梓皓，构造。
-// 2021.12.7, 21:25. By 唐梓皓，sl部分重构。
 #pragma once
 #ifndef _RAND_SUMMONER_
 #define _RAND_SUMMONER_

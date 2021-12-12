@@ -1,8 +1,9 @@
-#include "eventHeap.h"
-#include "eventlist.h"
-#include "event.h"
-#include "eventheader.h"
 #include <ctime>
+
+#include "Headers/eventHeap.h"
+#include "Headers/eventlist.h"
+#include "Headers/basicheader.h"
+#include "Events/eventheader.h"
 
 RandSummoner EventList::rs((int)time(NULL));
 EventHeap EventList::eventHeap;

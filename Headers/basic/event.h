@@ -1,12 +1,10 @@
-// Update at 11/30, 22:50. By 唐梓皓, 添加OptionSet. 
-
 #ifndef EVENT_H
 #define EVENT_H
 
 #include <vector>
 #include <string>
-#include "character.h"
-#include "optionset.h"
+#include "Headers/basic/character.h"
+#include "Headers/basic/optionset.h"
 
 // 表示所有事件的个数
 #define EVENT_AMT (int)EventEnum::Event_End

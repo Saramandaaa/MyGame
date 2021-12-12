@@ -1,9 +1,7 @@
 #include<string>
 #include<assert.h>
 
-#include "attribute.h"
-#include "character.h"
-#include "event.h"
+#include "Headers/basicheader.h"
 
 //本学期知识水平输出，期末成绩=本学期知识水平*50(大于100也即100);
 //总知识水平delta=期末成绩;

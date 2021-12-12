@@ -1,4 +1,4 @@
-#include "textcode.h"
+#include "Headers/utility/textcode.h"
 
 QTextCodec* codec = QTextCodec::codecForName("GBK");
 

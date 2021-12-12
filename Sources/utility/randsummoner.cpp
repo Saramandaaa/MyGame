@@ -1,7 +1,4 @@
-// 2021.12.7, 20:20. By 唐梓皓，构造。
-// 2021.12.7, 21:25. By 唐梓皓，sl部分重构。
-
-#include "randsummoner.h"
+#include "Headers/utility/randsummoner.h"
 
 RandSummoner::RandSummoner(int seed) :
 	rangeHB(RAND_SUMMONER_RANGE_HB),

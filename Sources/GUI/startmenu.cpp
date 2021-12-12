@@ -1,9 +1,10 @@
-#include "startmenu.h"
-#include "ui_startmenu.h"
-#include "mainwindow.h"
-#include "loadsave.h"
 #include <QDebug>
 #include <QDialog>
+
+#include "ui_startmenu.h"
+#include "Headers/GUI/startmenu.h"
+#include "Headers/GUI/mainwindow.h"
+#include "Headers/GUI/loadsave.h"
 
 StartMenu::StartMenu(QWidget *parent)
     : QWidget(parent)

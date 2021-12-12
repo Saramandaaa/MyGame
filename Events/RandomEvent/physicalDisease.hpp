@@ -1,9 +1,7 @@
 #include<string>
 #include<assert.h>
 
-#include "attribute.h"
-#include "character.h"
-#include "event.h"
+#include "Headers/basicheader.h"
 
 //触发概率=（身体素质上限-当前身体素质）/（身体素质上限）+（1-身体素质上限）
 //身体素质上限-0.1；身体素质归上限-0.1

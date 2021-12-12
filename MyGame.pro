@@ -16,20 +16,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Sources/attribute.cpp \
-    Sources/character.cpp \
-    Sources/controller.cpp \
-    Sources/event.cpp \
-    Sources/eventHeap.cpp \
-    Sources/eventlist.cpp \
-    Sources/main.cpp \
-    Sources/optionset.cpp \
-    Sources/saveinfo.cpp \
+    Sources/basic/attribute.cpp \
+    Sources/basic/character.cpp \
+    Sources/basic/event.cpp \
+    Sources/basic/optionset.cpp \
     Sources/GUI/mainwindow.cpp \
     Sources/GUI/startmenu.cpp \
     Sources/GUI/loadsave.cpp \
     Sources/utility/textcode.cpp \
-    Sources/utility/randsummoner.cpp
+    Sources/utility/saveinfo.cpp \
+    Sources/utility/randsummoner.cpp \
+    Sources/controller.cpp \
+    Sources/eventHeap.cpp \
+    Sources/eventlist.cpp \
+    Sources/main.cpp \
 
 HEADERS += \
     Events/ConstantEvent/entranceExam.hpp \
@@ -51,20 +51,21 @@ HEADERS += \
     Events/RandomEvent/prp.hpp \
     Events/RandomEvent/sayGoodBye.hpp \
     Events/RandomEvent/voteStudentAssociation.hpp \
-    Headers/attribute.h \
-    Headers/character.h \
-    Headers/controller.h \
-    Headers/event.h \
-    Headers/eventHeap.h \
-    Headers/eventheader.h \
-    Headers/eventlist.h \
-    Headers/optionset.h \
-    Headers/saveinfo.h \
+    Events/eventheader.h \
+    Headers/basic/attribute.h \
+    Headers/basic/character.h \
+    Headers/basic/event.h \
+    Headers/basic/optionset.h \
     Headers/GUI/mainwindow.h \
     Headers/GUI/startmenu.h \
     Headers/GUI/loadsave.h \
+    Headers/basicheader.h \
     Headers/utility/textcode.h \
-    Headers/utility/randsummoner.h
+    Headers/utility/saveinfo.h \
+    Headers/utility/randsummoner.h \
+    Headers/controller.h \
+    Headers/eventHeap.h \
+    Headers/eventlist.h \
 
 FORMS += \
     Forms/loadsave.ui \

@@ -1,5 +1,3 @@
-// Updata at 11/30, 22:50. By ÌÆè÷ð©, ³õ´Î±àÐ´. 
-
 #ifndef _OPTION_H_
 #define _OPTION_H_
 

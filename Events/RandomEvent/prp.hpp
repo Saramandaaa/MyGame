@@ -1,9 +1,7 @@
 #include<string>
 #include<assert.h>
 
-#include "attribute.h"
-#include "character.h"
-#include "event.h"
+#include "Headers/basicheader.h"
 
 //触发条件：总知识水平能力>=80(当前学期数-1)、每个学期（第一学期除外）开始
 //开启daily_event_prptask，限时两个学期
